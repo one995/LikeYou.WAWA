@@ -10,7 +10,16 @@
       Title="首页">
 
     <Grid Background="White">
-        <TextBlock Height="100" Width="100" Text="我是首页"> </TextBlock>
-     
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.9*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Height="100" Width="100" Text="我是首页"></TextBlock>
+        </Grid>
+        <Grid Grid.Row="1">
+            <TextBlock Height="100" Width="100" Text="我是首页"></TextBlock>
+        </Grid>
+
     </Grid>
 </Page>

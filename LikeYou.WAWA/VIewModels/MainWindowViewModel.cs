@@ -43,27 +43,26 @@ namespace LikeYou.WAWA.VIewModels
                     this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative) ;
                     break;
                 case "用户":
-                    this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative);
+                    this.MainActivePage=new Uri(@"../Pages/UserPage.xaml", UriKind.Relative);
                     break;
-                case "角色":
-          
-                    this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative);
+                case "角色":      
+                    this.MainActivePage=new Uri(@"../Pages/RolePage.xaml", UriKind.Relative);
                     break;
                 case "权限管理":
              
-                    this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative);
+                    this.MainActivePage=new Uri(@"../Pages/PowerPage.xaml", UriKind.Relative);
                     break;
                 case "部门管理":
               
-                    this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative);
+                    this.MainActivePage=new Uri(@"../Pages/DeptPage.xaml", UriKind.Relative);
                     break;
                 case "聊天室":
                
-                    this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative);
+                    this.MainActivePage=new Uri(@"../Pages/MessagePage.xaml", UriKind.Relative);
                     break;
                 case "关于":
              
-                    this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative);
+                    this.MainActivePage=new Uri(@"../Pages/AboutPage.xaml", UriKind.Relative);
                     break;
                 default:
                     break;
@@ -71,9 +70,9 @@ namespace LikeYou.WAWA.VIewModels
            
         }
 
-        public RelayCommand<string> SelectCmd => new(Select);
+        //public RelayCommand<string> SelectCmd => new(Select);
 
-        private void Select(string header) => Growl.Success(header);
+        //private void Select(string header) => Growl.Success(header);
 
         
 

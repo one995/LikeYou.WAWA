@@ -7,7 +7,6 @@
         xmlns:vm="clr-namespace:LikeYou.WAWA.VIewModels"
         mc:Ignorable="d"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-       
         Title="孤狼的远方" Height="800" Width="1200"  WindowStartupLocation="CenterScreen"
          Style="{StaticResource BaseStyle}">
     
@@ -40,8 +39,8 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*" ></RowDefinition>
-                <RowDefinition Height="0.8*"></RowDefinition>
+                <RowDefinition Height="0.1*" ></RowDefinition>
+                <RowDefinition Height="0.9*"></RowDefinition>
             </Grid.RowDefinitions>
             <hc:SideMenu BorderThickness="1"  Grid.Row="1"  Background="White" >
                 <hc:Interaction.Triggers>
@@ -56,32 +55,33 @@
                     </hc:SideMenuItem.Icon>
 
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="用户" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}" >
+                <hc:SideMenuItem Header="用户"  >
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="角色" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Header="角色" >
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="权限管理" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}" >
+                <!--Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}"-->
+                <hc:SideMenuItem Header="权限管理"  >
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="部门管理" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}" >
+                <hc:SideMenuItem Header="部门管理" >
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="聊天室" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Header="聊天室" >
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xe82d;" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="关于" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                <hc:SideMenuItem Header="关于">
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
@@ -90,12 +90,29 @@
 
             </hc:SideMenu>
             <StackPanel Grid.Row="0">
-                <Image Source="/Image/logol.png"></Image>
+                <!--<Image Source="/Image/logol.png"></Image>-->
+   
+                <hc:TransitioningContentControl>
+                    <Viewbox Height="86" >
+                        <hc:Gravatar Style="{StaticResource GravatarCircle}" Source="/Image/logol.png" Height="30" Width="30"/>
+                        <!--<hc:AnimationPath VerticalAlignment="Center" Duration="0:0:6" Stretch="Uniform" Width="1024" Height="1024" StrokeThickness="10" Stroke="{DynamicResource PrimaryBrush}" Data="{StaticResource ClockGeometry}"/>-->
+                    </Viewbox>
+                </hc:TransitioningContentControl>
             </StackPanel>
 
         </Grid>
         <Grid Grid.Column="1">
-            <Frame Source="{Binding Path=MainActivePage}" NavigationUIVisibility="Hidden"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*" ></RowDefinition>
+                <RowDefinition Height="0.8*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                
+            </Grid>
+            <Grid Grid.Row="1">
+                <Frame Source="{Binding Path=MainActivePage}" NavigationUIVisibility="Hidden"/>
+            </Grid>
+            
         </Grid>
     </Grid>
 

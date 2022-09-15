@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                     xmlns:o="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
     <sys:String x:Key="str">字符</sys:String>
-    
 </ResourceDictionary>
