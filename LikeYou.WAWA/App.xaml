@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:LikeYou.WAWA"
              xmlns:login="clr-namespace:LikeYou.WAWA.Windows"
              xmlns:hc="https://handyorg.github.io/handycontrol"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:LikeYou.WAWA.VIewModels"
            Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
@@ -11,6 +13,7 @@
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinViolet.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <!--<viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>
