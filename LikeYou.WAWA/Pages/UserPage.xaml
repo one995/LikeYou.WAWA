@@ -3,12 +3,66 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
       xmlns:local="clr-namespace:LikeYou.WAWA.Pages"
+      xmlns:nc="clr-namespace:LikeYou.WAWA.MyControl"
+      xmlns:vm="clr-namespace:LikeYou.WAWA.VIewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="UserPage">
+      Title="UserPage"
+   >
 
-    <Grid>
-        
+    <Grid Background="{DynamicResource BorderBrush}">
+        <Grid.Resources>
+            <vm:UserViewModel x:Key="vModel" />
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource vModel}" />
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel  Grid.Row="0"   >
+            <TextBlock Text="11111"></TextBlock>
+        </StackPanel>
+        <DataGrid Grid.Row="1"  HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" ItemsSource="{Binding Personinfos}">
+            <DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Width="80" CanUserResize="False" Binding="{Binding Id}" Header="序号"/>
+                <DataGridTemplateColumn Width="60" CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImgPath}" Width="32" Height="32" Stretch="Uniform"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="80" Binding="{Binding PersonID}" Header="用户编号"/>
+                <DataGridTextColumn Width="80" Binding="{Binding Name}" Header="姓名"/>
+                <DataGridTextColumn Width="80" Binding="{Binding Eamil}" Header="邮箱"/>
+                <DataGridTextColumn Width="80" Binding="{Binding DeptName}" Header="部门"/>
+                <DataGridTextColumn Width="80" Binding="{Binding UserRole}" Header="角色"/>
+                <DataGridTextColumn Width="80" Binding="{Binding Age}" Header="年龄"/>
+                <!--<DataGridCheckBoxColumn Width="100" CanUserResize="False" Binding="{Binding IsSelected}" Header="是否选择"/>-->
+                <!--<DataGridComboBoxColumn ItemsSource="{Binding  }" Width="100" CanUserResize="False" SelectedValueBinding="{Binding UserRole}" Header="角色"/>-->
+               
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<nc:PageChangeControl Grid.Row="2"  CurrentPageChangeT="{ Binding CurrentPageChangeT}" >
+            
+        </nc:PageChangeControl>-->
+
+        <hc:Pagination Grid.Row="2" MaxPageCount="10" PageIndex="1" IsJumpEnabled="True">
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="PageUpdated">
+                    <hc:EventToCommand Command="{Binding PageUpdatedCmd}" PassEventArgsToCommand="True" />
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+        </hc:Pagination>
     </Grid>
 </Page>

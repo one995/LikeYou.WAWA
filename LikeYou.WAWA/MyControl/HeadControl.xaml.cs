@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LikeYou.WAWA
+namespace LikeYou.WAWA.MyControl
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// HeadControl.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow 
+    public partial class HeadControl : UserControl
     {
-        public MainWindow()
+        public HeadControl()
         {
             InitializeComponent();
-            //this.DataContext = new VIewModels.MainWindowViewModel();
         }
     }
 }

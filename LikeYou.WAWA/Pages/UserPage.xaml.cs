@@ -23,6 +23,7 @@ namespace LikeYou.WAWA.Pages
         public UserPage()
         {
             InitializeComponent();
+            this.DataContext = new VIewModels.UserViewModel();
         }
     }
 }

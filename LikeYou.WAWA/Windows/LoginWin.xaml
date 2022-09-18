@@ -7,7 +7,6 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:login="clr-namespace:LikeYou.WAWA.VIewModels" 
-        d:DataContext="{d:DesignInstance Type=login:LoginViewModel}"
         xmlns:pass="clr-namespace:LikeYou.WAWA.EX"
         mc:Ignorable="d"
         Title="" Height="600" Width="800" WindowState="Normal" WindowStartupLocation="CenterScreen">
