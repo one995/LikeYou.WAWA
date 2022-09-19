@@ -17,7 +17,7 @@
                 <!--<Setter Property="FontFamily" Value="pack://application:,,,/Resource;Component/Font/#Font Awesome 5 Free"/>-->
             </ResourceDictionary.MergedDictionaries>
             <!--<viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>-->
-         
+          
         </ResourceDictionary>
         
     </Application.Resources>

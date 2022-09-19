@@ -8,6 +8,6 @@ namespace LikeYou.WAWA.Common
 {
     public class StatisDicModel
     {
-        public List<Common.CommonEnum.UserRole> ListUserRole = ((Common.CommonEnum.UserRole[]) Enum.GetValues(typeof(Common.CommonEnum.UserRole))).ToList();
+        public List<Common.UserRole> ListUserRole = ((Common.UserRole[]) Enum.GetValues(typeof(Common.UserRole))).ToList();
     }
 }

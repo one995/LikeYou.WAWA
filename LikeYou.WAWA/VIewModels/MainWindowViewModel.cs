@@ -52,9 +52,13 @@ namespace LikeYou.WAWA.VIewModels
              
                     this.MainActivePage=new Uri(@"../Pages/PowerPage.xaml", UriKind.Relative);
                     break;
-                case "部门管理":
+                case "组织管理":
               
                     this.MainActivePage=new Uri(@"../Pages/DeptPage.xaml", UriKind.Relative);
+                    break;
+                case "菜单管理":
+
+                    this.MainActivePage=new Uri(@"../Pages/MeunPage.xaml", UriKind.Relative);
                     break;
                 case "聊天室":
                

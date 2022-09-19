@@ -139,12 +139,17 @@
                         <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="部门管理" >
+                <hc:SideMenuItem Header="组织管理" >
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="聊天室" >
+                    <hc:SideMenuItem Header="菜单管理" >
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="聊天室" >
                     <hc:SideMenuItem.Icon>
                         <TextBlock Text="&#xe82d;" Style="{StaticResource TextBlockFabricIcons}"/>
                     </hc:SideMenuItem.Icon>

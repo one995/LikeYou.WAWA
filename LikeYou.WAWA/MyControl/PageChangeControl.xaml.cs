@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CommunityToolkit.Mvvm.Input;
+using HandyControl.Controls;
+using HandyControl.Data;
 using LikeYou.WAWA.Models;
 namespace LikeYou.WAWA.MyControl
 {
@@ -22,18 +24,18 @@ namespace LikeYou.WAWA.MyControl
     /// </summary>
     public partial class PageChangeControl : UserControl
     {
-
-        public Action<int> CurrentPageChangeTAction { set; get; }
-        public RelayCommand<string> CurrentPageChange { get; set; }
-
-
         public PageChangeControl()
         {
             InitializeComponent();
             //CurrentPageChange=new RelayCommand<string>((s) => CurrentPageChangeT(s));
-            //PageText="第0/0页 共0页";
-            //CurrentPage=1;
+            PageStr.Content = "第0/0页 共0页";
+            CurrentPage=1;
             //PageModel = new PageModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentPage--;
         }
 
         //private void CurrentPageChangeT(string Type)
@@ -68,7 +70,7 @@ namespace LikeYou.WAWA.MyControl
         //    CurrentPageChangeTAction?.Invoke(CurrentPage);
         //}
 
-        //private string _pageText;
+        private string PageText { get; set; }
 
         //public string PageText
         //{
@@ -76,13 +78,14 @@ namespace LikeYou.WAWA.MyControl
         //    get => _pageText;
         //}
 
-        //private int _CurrentPage;
+        private int CurrentPage;
 
-        //public int CurrentPage
-        //{
-        //    set => SetProperty(ref _CurrentPage, value);
-        //    get => _CurrentPage;
-        //}
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            CurrentPage++;
+            PageStr.Content = PageText;
+        }
+
         //private PageModel? _pageModel;
 
         //public PageModel PageModel

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:LikeYou.WAWA.VIewModels"
              xmlns:local="clr-namespace:LikeYou.WAWA.MyControl"
              xmlns:hc="https://handyorg.github.io/handycontrol"
 
@@ -23,25 +22,20 @@
 
     <Grid >
 
-        <Grid.Resources>
-            <vm:PageViewModel x:Key="vModel" />
-        </Grid.Resources>
-        <Grid.DataContext>
-            <Binding Source="{StaticResource vModel}" />
-        </Grid.DataContext>
+  
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition  Width="1*"></ColumnDefinition>
             <ColumnDefinition  Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel  Grid.Column="0"   >
-            <Button Content="上一页" Style="{StaticResource ButtonPrimary}"   HorizontalAlignment="Right" />
+            <Button Content="上一页" Style="{StaticResource ButtonPrimary}"   HorizontalAlignment="Right" Click="Button_Click" />
         </StackPanel>
         <StackPanel Grid.Column="1" >
-            <Label  Content="{ Binding PageText}" ></Label>
+            <Label  x:Name="PageStr" ></Label>
         </StackPanel>
         <StackPanel Grid.Column="2" >
-            <Button  Content="下一页" Style="{StaticResource ButtonPrimary}"   HorizontalAlignment="Left"   />
+            <Button  Content="下一页" Style="{StaticResource ButtonPrimary}"   HorizontalAlignment="Left" Click="Button_Click_1"   />
         </StackPanel>
 
 

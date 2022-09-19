@@ -8,14 +8,14 @@ namespace LikeYou.WAWA.Common
 {
     public class CommonEnum
     {
-        public enum UserRole
-        {
-            超级管理员,
-            管理员,
-            操作员,
-            用户
-        }
+      
     }
 
-
+    public enum UserRole
+    {
+        超级管理员,
+        管理员,
+        操作员,
+        用户
+    }
 }

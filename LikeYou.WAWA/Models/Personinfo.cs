@@ -20,7 +20,7 @@ namespace LikeYou.WAWA.Models
 
         public string Eamil { get; set; }
 
-        public Common.CommonEnum.UserRole UserRole { get; set; }
+        public Common.UserRole UserRole { get; set; }
 
         public DateTime? Created { get; set; }
 
