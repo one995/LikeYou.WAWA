@@ -10,7 +10,7 @@
       xmlns:nc="clr-namespace:LikeYou.WAWA.MyControl"
       xmlns:vm="clr-namespace:LikeYou.WAWA.VIewModels"
        xmlns:st="clr-namespace:LikeYou.WAWA.Common"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="1000"
 
       Title="DeptPage">
 
@@ -25,6 +25,7 @@
         </Grid.DataContext>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="0.6*"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -34,14 +35,14 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel  Grid.Column="0"  HorizontalAlignment="Left"  Margin="32,0,10,10" >
+            <StackPanel  Grid.Column="0"  HorizontalAlignment="Left"  Margin="10,0,0,0" >
 
                 <!--<TextBox Style="{StaticResource TextBoxExtend}" Text="Content"/>-->
                 <TextBox   Width="250" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="姓名" Style="{StaticResource TextBoxExtend}"/>
                 <TextBox   Width="250" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="邮箱" Style="{StaticResource TextBoxExtend}"/>
 
             </StackPanel>
-            <StackPanel  Grid.Column="1"  HorizontalAlignment="Left"  Margin="32,0,10,10" >
+            <StackPanel  Grid.Column="1"  HorizontalAlignment="Left"  Margin="10,0,0,0" >
                 <ComboBox    Width="250" hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="部门" Style="{StaticResource ComboBoxExtend}" />
                 <ComboBox  ItemsSource="{ Binding Source={StaticResource UserRoles}}" Width="250" hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="角色" Style="{StaticResource ComboBoxExtend}" />
 
@@ -51,8 +52,13 @@
                 <Button Command="{Binding ExportCmd}" Content="导 出" Style="{StaticResource ButtonPrimary}" FontSize="15" Width="100" Height="30" Margin="10,10,10,10"/>
             </StackPanel>
         </Grid>
-
-        <DataGrid Grid.Row="1"   HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" ItemsSource="{Binding Personinfos}">
+        <StackPanel Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal" >
+            <Button Command="{ Binding ExportCmd}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding ExportCmd}" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
+            <Button Command="{Binding ExportCmd}" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding ExportCmd}" Content="分配组织" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
+        </StackPanel>
+        <DataGrid Grid.Row="2"   HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" ItemsSource="{Binding Personinfos}">
             <DataGrid.RowHeaderTemplate>
                 <DataTemplate>
                     <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
@@ -82,7 +88,7 @@
             
         </nc:PageChangeControl>-->
 
-        <hc:Pagination Grid.Row="2" MaxPageCount="{ Binding PageCount}" PageIndex="{Binding PageIndex}"  IsJumpEnabled="False" HorizontalAlignment="Right" >
+        <hc:Pagination Grid.Row="3" MaxPageCount="{ Binding PageCount}" PageIndex="{Binding PageIndex}"  IsJumpEnabled="False" HorizontalAlignment="Right" >
             <hc:Interaction.Triggers>
                 <hc:EventTrigger EventName="PageUpdated">
                     <hc:EventToCommand Command="{Binding PageUpdatedCmd}" PassEventArgsToCommand="True" />
