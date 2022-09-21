@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="LikeYou.WAWA.MyControl.PeronDecControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LikeYou.WAWA.MyControl"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="200">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" ></ColumnDefinition>
+            <ColumnDefinition Width="8*" ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <hc:Gravatar Style="{StaticResource GravatarCircleImg}">
+                <Image Source="/Image/logol.png"/>
+            </hc:Gravatar>
+        </Grid>
+        <StackPanel Grid.Column="1" >
+            <Label  BorderBrush="White"   FontSize="15" Content="孤狼的远方" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+            <Label   BorderBrush="White"  Content="输入的内容..."  HorizontalAlignment="Left" Margin="0,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

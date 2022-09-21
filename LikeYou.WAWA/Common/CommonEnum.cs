@@ -18,4 +18,10 @@ namespace LikeYou.WAWA.Common
         操作员,
         用户
     }
+
+    public enum MeunType
+    {
+        菜单,
+        按钮
+    }
 }

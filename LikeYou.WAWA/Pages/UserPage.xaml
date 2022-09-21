@@ -53,9 +53,9 @@
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal" >
-            <Button Command="{ Binding ExportCmd}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
-            <Button Command="{Binding ExportCmd}" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
-            <Button Command="{Binding ExportCmd}" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding AddCmd}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding UpdateCmd}" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
+            <Button Command="{Binding DeleteCmd}" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
             <Button Command="{Binding ExportCmd}" Content="分配菜单" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
         </StackPanel>
         <!--<hc:ButtonGroup   Grid.Row="1"   VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,2" >

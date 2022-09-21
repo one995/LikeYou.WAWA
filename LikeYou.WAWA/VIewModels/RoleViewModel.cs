@@ -29,20 +29,25 @@ namespace LikeYou.WAWA.VIewModels
             get =>_datalist;
             set => SetProperty(ref _datalist,value);
         }
+
+        public override void Add()
+        {
+            base.Add();
+        }
+
+        public override void Delete()
+        {
+            base.Delete();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+        }
         #region 操作指令
-       
-
-        //public RelayCommand<FunctionEventArgs<int>> PageUpdatedCmd => new((s) => PageUpdated(s));
-        //public void PageUpdated(FunctionEventArgs<int> info)
-        //{
-        //    PageIndex =info.Info;
-
-        //    //int toal=0;
-
-        //    //PageCount=toal;
 
 
-        //}
+
         #endregion
     }
 }

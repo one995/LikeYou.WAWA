@@ -15,10 +15,14 @@ namespace LikeYou.WAWA.VIewModels
     public partial class BaseViewModel : ObservableObject
     {
         public RelayCommand<FunctionEventArgs<int>> PageUpdatedCmd => new((s) => PageUpdated(s));
-        public RelayCommand SearchCmd => new(Search);
-        public RelayCommand ExportCmd => new(Export);
+        public  RelayCommand SearchCmd => new( Search); 
+        public RelayCommand ExportCmd => new( Export);
 
+        public RelayCommand AddCmd =>  new (Add);
 
+        public RelayCommand UpdateCmd => new ( Update);
+
+        public RelayCommand DeleteCmd =>  new (Delete);
         /// <summary>
         ///     页码
         /// </summary>
@@ -73,7 +77,7 @@ namespace LikeYou.WAWA.VIewModels
 #endif
         }
         #region commamd
-        public void PageUpdated(FunctionEventArgs<int> info)
+        public virtual void PageUpdated(FunctionEventArgs<int> info)
         {
             PageIndex =info.Info;
 
@@ -86,38 +90,41 @@ namespace LikeYou.WAWA.VIewModels
         /// <summary>
         /// 查询方法
         /// </summary>
-        public void Search()
+        public virtual void Search()
         {
 
         }
         /// <summary>
         /// 导出方法
         /// </summary>
-        public void Export()
+        public virtual void Export()
         {
 
         }
 
-        public RelayCommand AddCmd => new(Add);
+      
 
-        public void Add()
+        public virtual void Add()
         {
 
         }
 
-        public RelayCommand UpdateCmd => new(Update);
+  
 
-        public void Update()
+        public virtual void Update()
         {
 
         }
 
-        public RelayCommand DeleteCmd => new(Delete);
 
-        public void Delete()
+
+        public virtual void Delete() { }
+
+        public virtual void SumPageCount(int total)
         {
-
+           PageCount =  (total+10-1)/10;
         }
+
         #endregion
     }
 }

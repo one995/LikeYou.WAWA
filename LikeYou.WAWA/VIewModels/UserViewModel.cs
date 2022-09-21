@@ -27,6 +27,35 @@ namespace LikeYou.WAWA.VIewModels
             };
             PageCount=(_Personinfos.Count+10-1)/10;
         }
-     
+
+        public override void Add()
+        {
+
+        }
+
+        public override void PageUpdated(FunctionEventArgs<int> info)
+        {
+            base.PageUpdated(info);
+        }
+
+        public override void Search()
+        {
+            base.Search();
+        }
+
+        public override void Export()
+        {
+            base.Export();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+        }
+
+        public override void Delete()
+        {
+            base.Delete();
+        }
     }
 }

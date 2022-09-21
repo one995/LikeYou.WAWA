@@ -4,11 +4,97 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LikeYou.WAWA.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="MeunPage">
+        mc:Ignorable="d" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
 
-    <Grid>
-        
+      xmlns:nc="clr-namespace:LikeYou.WAWA.MyControl"
+      xmlns:vm="clr-namespace:LikeYou.WAWA.VIewModels"
+       xmlns:st="clr-namespace:LikeYou.WAWA.Common"
+      d:DesignHeight="800" d:DesignWidth="1000"
+      Title="菜单管理">
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.Resources>
+            <vm:MeunViewModel x:Key="vModel" />
+            <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource vModel}" />
+
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <!--<RowDefinition Height="2*"></RowDefinition>-->
+            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--<Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center" Grid.Column="0"  HorizontalAlignment="Left"  Margin="10,0,0,0" >
+
+                --><!--<TextBox Style="{StaticResource TextBoxExtend}" Text="Content"/>--><!--
+                <TextBox   Width="250" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="名称" Style="{StaticResource TextBoxExtend}"/>
+
+
+            </StackPanel>
+            <StackPanel  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="10,0,0,0" >
+                <TextBox   Width="250" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="父级ID" Style="{StaticResource TextBoxExtend}"/>
+                --><!--<ComboBox    Width="250" hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="部门" Style="{StaticResource ComboBoxExtend}" />
+                <ComboBox  ItemsSource="{ Binding Source={StaticResource UserRoles}}" Width="250" hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="角色" Style="{StaticResource ComboBoxExtend}" />--><!--
+
+            </StackPanel>
+            <StackPanel  Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Left"   >
+                <Button  Command="{ Binding SearchCmd}" Content="查 询" Style="{StaticResource ButtonPrimary}" FontSize="15" Width="100" Height="30" Margin="0,15,0,0"/>
+                --><!--<Button Command="{Binding ExportCmd}" Content="导 出" Style="{StaticResource ButtonPrimary}" FontSize="15" Width="100" Height="30" Margin="10,10,10,10"/>--><!--
+            </StackPanel>
+        </Grid>-->
+        <StackPanel Grid.Row="0"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal" >
+            <Button Command="{Binding AddCmd}" CommandParameter="新增" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding UpdateCmd}" CommandParameter="修改" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
+            <Button Command="{Binding DeleteCmd}" CommandParameter="删除" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding ExportCmd}" CommandParameter="分配菜单" Content="分配组织" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
+        </StackPanel>
+        <DataGrid  hc:Empty.ShowEmpty="True" Grid.Row="1"   HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" ItemsSource="{Binding Models}">
+            <DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Width="*" CanUserResize="False" Binding="{Binding Id}" Header="序号"/>
+                <!--<DataGridTemplateColumn Width="60" CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImgPath}" Width="32" Height="32" Stretch="Uniform"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <!--<DataGridTextColumn Width="*" CanUserResize="False" Binding="{Binding Id}" Header="序号"/>-->
+                <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="名称"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Perent}" Header="父级ID"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Flag}" Header="标志"/>
+                <DataGridTextColumn Width="*" Binding="{Binding type}" Header="菜单类型"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Url}" Header="菜单URL"/>
+                <!--<DataGridTextColumn Width="*" Binding="{Binding Age}" Header="年龄"/>-->
+                <!--<DataGridCheckBoxColumn Width="100" CanUserResize="False" Binding="{Binding IsSelected}" Header="是否选择"/>-->
+                <!--<DataGridComboBoxColumn ItemsSource="{Binding  }" Width="100" CanUserResize="False" SelectedValueBinding="{Binding UserRole}" Header="角色"/>-->
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<nc:PageChangeControl Grid.Row="2"  CurrentPageChangeT="{ Binding CurrentPageChangeT}" >
+            
+        </nc:PageChangeControl>-->
+
+        <hc:Pagination Grid.Row="2" MaxPageCount="{ Binding PageCount}" PageIndex="{Binding PageIndex}"  IsJumpEnabled="False" HorizontalAlignment="Right" >
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="PageUpdated">
+                    <hc:EventToCommand Command="{Binding PageUpdatedCmd}"  PassEventArgsToCommand="True" />
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+        </hc:Pagination>
     </Grid>
 </Page>
