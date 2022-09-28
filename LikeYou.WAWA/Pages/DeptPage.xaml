@@ -54,10 +54,10 @@
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal" >
-            <Button Command="{Binding AddCmd}" CommandParameter="新增" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding AddCmd}" CommandParameter="新增" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="10,0,10,0"    />
             <Button Command="{Binding UpdateCmd}" CommandParameter="修改" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
             <Button Command="{Binding DeleteCmd}" CommandParameter="删除" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
-            <Button Command="{Binding ExportCmd}" CommandParameter="分配组织" Content="分配组织" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
+            <Button Command="{Binding ExportCmd}" CommandParameter="分配" Content="分配组织" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
         </StackPanel>
         <DataGrid  hc:Empty.ShowEmpty="True" Grid.Row="2"   HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" ItemsSource="{Binding Deptments}">
             <DataGrid.RowHeaderTemplate>
@@ -77,7 +77,7 @@
                 <!--<DataGridTextColumn Width="*" CanUserResize="False" Binding="{Binding Id}" Header="序号"/>-->
                 <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="名称"/>
                 <DataGridTextColumn Width="*" Binding="{Binding Perent}" Header="父级ID"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Description}" Header="部门"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Description}" Header="备注"/>
                 <DataGridTextColumn Width="*" Binding="{Binding UUID}" Header="UUID"/>
                 <!--<DataGridTextColumn Width="*" Binding="{Binding Age}" Header="年龄"/>-->
                 <!--<DataGridCheckBoxColumn Width="100" CanUserResize="False" Binding="{Binding IsSelected}" Header="是否选择"/>-->

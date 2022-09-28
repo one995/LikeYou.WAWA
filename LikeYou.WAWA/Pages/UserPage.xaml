@@ -8,20 +8,21 @@
       xmlns:nc="clr-namespace:LikeYou.WAWA.MyControl"
       xmlns:vm="clr-namespace:LikeYou.WAWA.VIewModels"
        xmlns:st="clr-namespace:LikeYou.WAWA.Common"
+      xmlns:wim="clr-namespace:LikeYou.WAWA.Windows"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1000"
       Title="UserPage"
    >
+    <Page.Resources>
+        <vm:UserViewModel x:Key="vModel" />
+        <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
+    </Page.Resources>
+    <Page.DataContext>
+        <Binding Source="{StaticResource vModel}" />
 
+    </Page.DataContext>
     <Grid Background="{StaticResource BackgroundBrush}">
-        <Grid.Resources>
-            <vm:UserViewModel x:Key="vModel" />
-            <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
-        </Grid.Resources>
-        <Grid.DataContext>
-            <Binding Source="{StaticResource vModel}" />
-          
-        </Grid.DataContext>
+     
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="0.6*"></RowDefinition>
@@ -53,7 +54,7 @@
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal" >
-            <Button Command="{Binding AddCmd}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding ShowCommand}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
             <Button Command="{Binding UpdateCmd}" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
             <Button Command="{Binding DeleteCmd}" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
             <Button Command="{Binding ExportCmd}" Content="分配菜单" Style="{StaticResource ButtonSuccess}" FontSize="15"     />

@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="LikeYou.WAWA.Pages.Dialogs.AddUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LikeYou.WAWA.Pages.Dialogs"
+             mc:Ignorable="d" 
+                  xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:vm="clr-namespace:LikeYou.WAWA.VIewModels"
+           xmlns:st="clr-namespace:LikeYou.WAWA.Common"
+             d:DesignHeight="350" d:DesignWidth="450"
+              >
+    <Grid hc:TitleElement.Title="新增人员" Margin="10">
+        <Grid.Resources>
+            <vm:EditAddViewModel x:Key="vModel" />
+            <vm:UserViewModel x:Key="svModel" />
+            <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource vModel}" />
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid  Grid.Row="0"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel  Grid.Column="0"  HorizontalAlignment="Center" >
+                <!--<TextBox Style="{StaticResource TextBoxExtend}" Text="Content"/>-->
+                <TextBox   Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="姓名" Style="{StaticResource TextBoxExtend}"/>
+                <TextBox   Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="邮箱" Style="{StaticResource TextBoxExtend}"/>
+                <ComboBox  ItemsSource="{ Binding Source={StaticResource UserRoles}}" Width="200" hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="角色" Style="{StaticResource ComboBoxExtend}" />
+                <TextBox   Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="年龄" Style="{StaticResource TextBoxExtend}"/>
+            </StackPanel>
+            <StackPanel  Grid.Column="1"  HorizontalAlignment="Center"  Grid.Row="0" >
+                <!--<TextBox Style="{StaticResource TextBoxExtend}" Text="Content"/>-->
+                <TextBox   Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="年龄" Style="{StaticResource TextBoxExtend}"/>
+                <ComboBox    Width="200"  hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="部门" Style="{StaticResource ComboBoxExtend}" />
+                <TextBox   IsReadOnly="True" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="更新时间" Style="{StaticResource TextBoxExtend}"/>
+                <TextBox    IsReadOnly="True" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="更新人" Style="{StaticResource TextBoxExtend}"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="1"  VerticalAlignment="Top" HorizontalAlignment="Center"  Orientation="Horizontal"  Margin="10">
+            <Button Command="{Binding ShowCommand}" Content="确 定" Style="{StaticResource ButtonInfo}" FontSize="15" Width="80"   Margin="0,0,10,0"    />
+            <Button Command="{Binding UpdateCmd}" Content="取 消" Style="{StaticResource ButtonWarning}" FontSize="15"  Width="80"  Margin="0,0,10,0" />
+        </StackPanel>
+    </Grid>
+</UserControl>

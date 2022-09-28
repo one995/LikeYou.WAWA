@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-namespace LikeYou.WAWA.Pages
+using LikeYou.WAWA.VIewModels;
+namespace LikeYou.WAWA.Windows
 {
     /// <summary>
-    /// UserPage.xaml 的交互逻辑
+    /// EditAddWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class UserPage : Page
+    public partial class EditAddWindow : Window
     {
-        public UserPage()
+        public EditAddWindow()
         {
             InitializeComponent();
+            this.DataContext = new EditAddViewModel();
         }
     }
 }

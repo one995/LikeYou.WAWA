@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LikeYou.WAWA.Pages
+namespace LikeYou.WAWA.Pages.Dialogs
 {
     /// <summary>
-    /// UserPage.xaml 的交互逻辑
+    /// AddUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class UserPage : Page
+    public partial class AddUserControl : UserControl
     {
-        public UserPage()
+        public AddUserControl()
         {
             InitializeComponent();
         }
