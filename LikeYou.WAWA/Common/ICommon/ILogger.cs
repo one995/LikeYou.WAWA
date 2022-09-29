@@ -8,6 +8,8 @@ namespace LikeYou.WAWA.Common.ICommon
 {
     public interface ILogger
     {
-        void Info(string message);
+         void WriteToFileAndDB(string message, string flag = "Info", LogType log = LogType.Info);
+
+         void WriteToDB(string message, string flag = "Info", LogType log = LogType.Info);
     }
 }

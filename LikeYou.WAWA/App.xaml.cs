@@ -32,6 +32,7 @@ namespace LikeYou.WAWA
       
             .AddTransient<Windows.EditAddWindow>()     
              .AddTransient<Pages.Dialogs.AddUserControl>()
+             .AddSingleton<Common.ICommon.ILogger,Logger>()
              .AddSingleton(new Appsettings(basePath)) ;
            
             

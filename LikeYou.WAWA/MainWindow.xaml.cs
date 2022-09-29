@@ -23,6 +23,7 @@ namespace LikeYou.WAWA
         public MainWindow()
         {
             InitializeComponent();
+
             //this.DataContext = new VIewModels.MainWindowViewModel();
         }
     }

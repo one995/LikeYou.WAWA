@@ -20,6 +20,8 @@ namespace LikeYou.WAWA.VIewModels
 
         public RelayCommand AddCmd =>  new (Add);
 
+        public RelayCommand CanelCmd => new(Canel);
+
         public RelayCommand UpdateCmd => new ( Update);
 
         public RelayCommand DeleteCmd =>  new (Delete);
@@ -108,8 +110,11 @@ namespace LikeYou.WAWA.VIewModels
         {
 
         }
+        public virtual void Canel()
+        {
 
-  
+        }
+        
 
         public virtual void Update()
         {

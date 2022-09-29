@@ -12,7 +12,6 @@
     <Grid>
         <Grid.Resources>
             <vm:EditAddViewModel x:Key="vModel" />
-            <vm:UserViewModel x:Key="svModel" />
             <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
         </Grid.Resources>
         <Grid.DataContext>
@@ -22,31 +21,31 @@
             <RowDefinition Height="8*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-       
-        <Grid  Grid.Row="0"  >
+
+        <Grid  Grid.Row="0"   >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel  Grid.Column="0"  HorizontalAlignment="Center" >
                 <!--<TextBox Style="{StaticResource TextBoxExtend}" Text="Content"/>-->
-                <TextBox   Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="姓名" Style="{StaticResource TextBoxExtend}"/>
-                <TextBox   Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="邮箱" Style="{StaticResource TextBoxExtend}"/>
-                <ComboBox  ItemsSource="{ Binding Source={StaticResource UserRoles}}" Width="200" hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="角色" Style="{StaticResource ComboBoxExtend}" />
-                <TextBox   Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="年龄" Style="{StaticResource TextBoxExtend}"/>
+                <TextBox    Text="{Binding Personinfo.Name}" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="姓名" Style="{StaticResource TextBoxExtend}"/>
+                <TextBox   Text="{Binding Personinfo.Eamil}" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="邮箱" Style="{StaticResource TextBoxExtend}"/>
+                <ComboBox   Text="{Binding Personinfo.UserRole}" ItemsSource="{ Binding Source={StaticResource UserRoles}}" Width="200" hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="角色" Style="{StaticResource ComboBoxExtend}" />
+                <TextBox    Text="{Binding Personinfo.Age}" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="年龄" Style="{StaticResource TextBoxExtend}"/>
             </StackPanel>
             <StackPanel  Grid.Column="1"  HorizontalAlignment="Center"  Grid.Row="0" >
                 <!--<TextBox Style="{StaticResource TextBoxExtend}" Text="Content"/>-->
-                <TextBox   Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="年龄" Style="{StaticResource TextBoxExtend}"/>
-                <ComboBox    Width="200"  hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="部门" Style="{StaticResource ComboBoxExtend}" />
-                <TextBox   IsReadOnly="True" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="更新时间" Style="{StaticResource TextBoxExtend}"/>
-                <TextBox    IsReadOnly="True" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="更新人" Style="{StaticResource TextBoxExtend}"/>
+                <TextBox   Text="{Binding Personinfo.PersonID}" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="ID" Style="{StaticResource TextBoxExtend}"/>
+                <ComboBox  Text="{Binding Personinfo.DeptName}"    Width="200"  hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="部门" Style="{StaticResource ComboBoxExtend}" />
+                <TextBox   Text="{Binding Personinfo.UpdateTime}"  IsReadOnly="True" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="更新时间" Style="{StaticResource TextBoxExtend}"/>
+                <TextBox   Text="{Binding Personinfo.UpdateUser}"   IsReadOnly="True" Width="200" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="更新人" Style="{StaticResource TextBoxExtend}"/>
             </StackPanel>
         </Grid>
 
         <StackPanel Grid.Row="1"  VerticalAlignment="Top" HorizontalAlignment="Center"  Orientation="Horizontal" >
-            <Button Command="{Binding ShowCommand}" Content="确 定" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
-            <Button Command="{Binding UpdateCmd}" Content="取 消" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
+            <Button Command="{Binding AddCmd}" Content="确 定" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding CanelCmd}" Content="取 消" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
         </StackPanel>
     </Grid>
 </Window>

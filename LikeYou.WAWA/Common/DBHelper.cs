@@ -69,7 +69,9 @@ namespace LikeYou.WAWA.Common
                 }
             };
 
-            //RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Like.Model.Models.Article));//这样一个表就能成功创建了
+            RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.LogsInfo));//这样一个表就能成功创建了
+            RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.Personinfo));//这样一个表就能成功创建了
+            RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.Deptment));//这样一个表就能成功创建了
         }
     }
 }

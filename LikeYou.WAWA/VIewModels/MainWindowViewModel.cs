@@ -23,8 +23,23 @@ namespace LikeYou.WAWA.VIewModels
         public MainWindowViewModel()
         {
             Title="首页";
+            Common.CommonHelper.logsInfo = new Models.LoginUserInfo { UserName="admin" };
+            LoadsDB();
         }
+        private void LoadsDB()
+        {
+            try
+            {
+                Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.LogsInfo));//这样一个表就能成功创建了
+                Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.Personinfo));//这样一个表就能成功创建了
+                Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.Deptment));//这样一个表就能成功创建了
+            }
+            catch (Exception ex)
+            {
+                Serilog.Log.Error("初始化数据库异常:"+ex);
+            }
 
+        }
         public RelayCommand<FunctionEventArgs<object>> SwitchItemCmd => new(SwitchItem);
 
         private void SwitchItem(FunctionEventArgs<object> info) {

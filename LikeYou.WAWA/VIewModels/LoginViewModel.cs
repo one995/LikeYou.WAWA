@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using CommunityToolkit.Mvvm.Input;
+using LikeYou.WAWA.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +30,19 @@ namespace LikeYou.WAWA.VIewModels
             Console.WriteLine(Password);
             if (loginName=="123456"&&Password=="123456")
             {
+                //初始化数据库
+
+
+                
                 await Task.Delay(100);
                 new MainWindow().Show();
                 
 
+
             }
             return true;
         }
+
+    
     }
 }

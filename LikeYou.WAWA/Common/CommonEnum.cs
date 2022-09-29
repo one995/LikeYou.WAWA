@@ -24,4 +24,14 @@ namespace LikeYou.WAWA.Common
         菜单,
         按钮
     }
+
+    public enum LogType
+    {
+        Error,
+        Info,
+        Debug,
+        Warning,
+        UserDao,
+
+    }
 }
