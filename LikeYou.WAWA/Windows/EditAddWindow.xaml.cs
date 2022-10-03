@@ -22,7 +22,7 @@ namespace LikeYou.WAWA.Windows
         public EditAddWindow()
         {
             InitializeComponent();
-            this.DataContext = new EditAddViewModel();
+            //this.DataContext = new EditAddWindowViewModel();
         }
     }
 }

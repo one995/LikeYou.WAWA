@@ -13,6 +13,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog.Events;
 using Serilog;
 using DryIoc.ImTools;
+using LikeYou.WAWA.EX;
+using DryIoc;
+using LikeYou.WAWA.VIewModels;
+using HanumanInstitute.MvvmDialogs.Wpf;
+using DialogService = HanumanInstitute.MvvmDialogs.Wpf.DialogService;
+using HanumanInstitute.MvvmDialogs;
 
 namespace LikeYou.WAWA
 {
@@ -21,24 +27,9 @@ namespace LikeYou.WAWA
     /// </summary>
     public partial class App : Application
     {
-        private void  Application_Startup(object sender, StartupEventArgs e)
-        {
-            Application currApp = Application.Current;
-            currApp.StartupUri = new Uri("MainWindow.xaml", UriKind.RelativeOrAbsolute);
-            var basePath = AppContext.BaseDirectory;
-
-            //services.AddControllersWithViews();
-            var server = new ServiceCollection()
-      
-            .AddTransient<Windows.EditAddWindow>()     
-             .AddTransient<Pages.Dialogs.AddUserControl>()
-             .AddSingleton<Common.ICommon.ILogger,Logger>()
-             .AddSingleton(new Appsettings(basePath)) ;
-           
-            
-            Ioc.Default.ConfigureServices(server.BuildServiceProvider());
-
-
+        public App()
+        {    
+            ConfigureServices();
             const long defaultFileSizeLimitBytes = 1L * 1024 * 1024 * 20; // 10M
 
             Log.Logger = new LoggerConfiguration()
@@ -51,7 +42,54 @@ namespace LikeYou.WAWA
                 rollOnFileSizeLimit: true))
             .CreateLogger();
             Log.Information("程序启动");
+     
+            this.InitializeComponent();
         }
+
+
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            Application currApp = Application.Current;
+            currApp.StartupUri = new Uri("MainWindow.xaml", UriKind.RelativeOrAbsolute);
+        }
+
+        /// <summary>
+        /// Gets the current <see cref="App"/> instance in use
+        /// </summary>
+        public new static App Current => (App)Application.Current;
+
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
+
+        /// <summary>
+        /// Configures the services for the application.
+        /// </summary>
+        private static void ConfigureServices()
+        {
+            var basePath = AppContext.BaseDirectory;
+            var services = new ServiceCollection();
+
+
+            services
+           
+            .AddSingleton<Common.ICommon.ILogger, Logger>()
+              .AddSingleton<IDialogService>(new DialogService(
+                    new DialogManager(viewLocator: new ViewLocator()),
+                    viewModelFactory: x => Ioc.Default.GetService(x)))
+            //.AddSingleton<IDialogService, DialogService>()
+             .AddTransient<Pages.Dialogs.AddUserControl>()
+            .AddTransient<UserViewModel>()
+             .AddTransient<EditAddWindowViewModel>()
+            .AddSingleton(new Appsettings(basePath));
+
+   
+            Ioc.Default.ConfigureServices(services.BuildServiceProvider());
+        }
+
+     
 
     }
 }

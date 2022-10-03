@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using LikeYou.WAWA.VIewModels;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,7 @@ namespace LikeYou.WAWA.Pages
         public UserPage()
         {
             InitializeComponent();
+            this.DataContext= Ioc.Default.GetRequiredService<UserViewModel>();
         }
     }
 }

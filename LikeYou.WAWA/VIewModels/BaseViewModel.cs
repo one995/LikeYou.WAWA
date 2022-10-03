@@ -8,10 +8,12 @@ using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HandyControl.Data;
+using HanumanInstitute.MvvmDialogs.Wpf;
 
 namespace LikeYou.WAWA.VIewModels
 {
-  
+
+
     public partial class BaseViewModel : ObservableObject
     {
         public RelayCommand<FunctionEventArgs<int>> PageUpdatedCmd => new((s) => PageUpdated(s));
@@ -108,7 +110,7 @@ namespace LikeYou.WAWA.VIewModels
 
         public virtual void Add()
         {
-
+            Console.WriteLine(111);
         }
         public virtual void Canel()
         {
@@ -130,6 +132,8 @@ namespace LikeYou.WAWA.VIewModels
            PageCount =  (total+10-1)/10;
         }
 
+
+      
         #endregion
     }
 }

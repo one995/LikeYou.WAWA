@@ -11,11 +11,16 @@ using System.Windows.Controls;
 using LikeYou.WAWA.Common.ICommon;
 using LikeYou.WAWA.Common;
 using HandyControl.Tools.Extension;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Input;
+using HanumanInstitute.MvvmDialogs;
 
 namespace LikeYou.WAWA.VIewModels
 {
     public partial class UserViewModel:BaseViewModel
     {
+        private readonly RelayCommand addCommand;
+        public ICommand AddCommand => addCommand;
         [RelayCommand]
         public void Show()
         {
@@ -24,8 +29,12 @@ namespace LikeYou.WAWA.VIewModels
             //editAdd.Show();
             //Ioc.Default.GetService<ILogger>().Info("Hello world!");
             Serilog.Log.Information("打开窗口");
-            Ioc.Default.GetService<Windows.EditAddWindow>().ShowDialog();
+            var vm = new EditAddWindowViewModel();
+            dialogService.ShowDialog(this,vm);
+
         }
+
+
         public List<Models.Personinfo> Personinfos { set=>SetProperty(ref _Personinfos,value); get =>_Personinfos; }
 
         public List<Models.Personinfo> _Personinfos;
@@ -34,7 +43,8 @@ namespace LikeYou.WAWA.VIewModels
         public bool ShowPopu { set => SetProperty(ref _showPopu, value); get => _showPopu; }
         public ILogger Logs { get; }
 
-        public UserViewModel()
+        private readonly IDialogService dialogService;
+        public UserViewModel(IDialogService _dialogService)
         {
             _Personinfos =new List<Models.Personinfo>()
             {
@@ -43,12 +53,15 @@ namespace LikeYou.WAWA.VIewModels
                 },
             };
             PageCount=(_Personinfos.Count+10-1)/10;
-
+            dialogService=_dialogService;
+            addCommand = new RelayCommand(Add);
         }
 
         public override void Add()
         {
-            ShowPopu=!ShowPopu;
+            Serilog.Log.Information("打开窗口");
+            //var vm = dialogService.CreateViewModel<EditAddWindowViewModel>();
+            ShowDialogAsync(viewModel => dialogService.ShowDialogAsync(this, viewModel));
         }
 
         public override void PageUpdated(FunctionEventArgs<int> info)
@@ -74,6 +87,23 @@ namespace LikeYou.WAWA.VIewModels
         public override void Delete()
         {
             base.Delete();
+        }
+
+        private async Task ShowDialogAsync(Func<EditAddWindowViewModel, Task<bool?>> showDialog)
+        {
+            var dialogViewModel = dialogService.CreateViewModel<EditAddWindowViewModel>();
+            dialogViewModel.Personinfo=new Models.Personinfo
+            {
+                Name="111",
+                DeptName="222"
+            };
+
+            
+
+            dialogViewModel.Title = "ssssss";
+            dialogViewModel.Text = "ttttt";
+            bool? success = await showDialog(dialogViewModel);
+   
         }
     }
 }

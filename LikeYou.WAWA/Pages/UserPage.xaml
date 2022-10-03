@@ -3,24 +3,22 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
       xmlns:hc="https://handyorg.github.io/handycontrol"
-      xmlns:local="clr-namespace:LikeYou.WAWA.Pages"
-      xmlns:nc="clr-namespace:LikeYou.WAWA.MyControl"
-      xmlns:vm="clr-namespace:LikeYou.WAWA.VIewModels"
-       xmlns:st="clr-namespace:LikeYou.WAWA.Common"
-      xmlns:wim="clr-namespace:LikeYou.WAWA.Windows"
+      xmlns:st="clr-namespace:LikeYou.WAWA.Common"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1000"
+    
+  
       Title="UserPage"
    >
     <Page.Resources>
-        <vm:UserViewModel x:Key="vModel" />
         <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
     </Page.Resources>
-    <Page.DataContext>
-        <Binding Source="{StaticResource vModel}" />
+    <!--<Page.DataContext>
+        <Binding Source="{ Binding {StaticResource userViewModel}, Path=userViewModel } " />
 
-    </Page.DataContext>
+    </Page.DataContext>-->
     <Grid Background="{StaticResource BackgroundBrush}">
      
         <Grid.RowDefinitions>
@@ -54,7 +52,7 @@
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal" >
-            <Button Command="{Binding ShowCommand}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding AddCommand}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
             <Button Command="{Binding UpdateCmd}" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
             <Button Command="{Binding DeleteCmd}" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
             <Button Command="{Binding ExportCmd}" Content="分配菜单" Style="{StaticResource ButtonSuccess}" FontSize="15"     />

@@ -12,8 +12,7 @@
               >
     <Grid hc:TitleElement.Title="新增人员" Margin="10">
         <Grid.Resources>
-            <vm:EditAddViewModel x:Key="vModel" />
-            <vm:UserViewModel x:Key="svModel" />
+            <vm:EditAddWindowViewModel x:Key="vModel" />
             <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
         </Grid.Resources>
         <Grid.DataContext>
