@@ -14,30 +14,20 @@ using HandyControl.Tools.Extension;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Input;
 using HanumanInstitute.MvvmDialogs;
+using HandyControl.Controls;
+using SqlSugar;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace LikeYou.WAWA.VIewModels
 {
     public partial class UserViewModel:BaseViewModel
     {
         private readonly RelayCommand addCommand;
-        public ICommand AddCommand => addCommand;
-        [RelayCommand]
-        public void Show()
-        {
-            Console.WriteLine(111);
-            //Windows.EditAddWindow editAdd = new Windows.EditAddWindow();
-            //editAdd.Show();
-            //Ioc.Default.GetService<ILogger>().Info("Hello world!");
-            Serilog.Log.Information("打开窗口");
-            var vm = new EditAddWindowViewModel();
-            dialogService.ShowDialog(this,vm);
 
-        }
+        [ObservableProperty]
+        public List<Models.Personinfo> personinfos;
 
-
-        public List<Models.Personinfo> Personinfos { set=>SetProperty(ref _Personinfos,value); get =>_Personinfos; }
-
-        public List<Models.Personinfo> _Personinfos;
+        //public List<Models.Personinfo> _Personinfos;
         public bool _showPopu=false;
 
         public bool ShowPopu { set => SetProperty(ref _showPopu, value); get => _showPopu; }
@@ -46,21 +36,20 @@ namespace LikeYou.WAWA.VIewModels
         private readonly IDialogService dialogService;
         public UserViewModel(IDialogService _dialogService)
         {
-            _Personinfos =new List<Models.Personinfo>()
-            {
-                new Models.Personinfo(){
-                    Name="没有数据"
-                },
-            };
-            PageCount=(_Personinfos.Count+10-1)/10;
+            Personinfos =  GetPersoninfos().Result;
+            SumPageCount();
             dialogService=_dialogService;
-            addCommand = new RelayCommand(Add);
+        }
+
+        public async Task< List<Models.Personinfo>> GetPersoninfos()
+        {
+            var me = await Bll.DBCommon.PeronDao.GetPageList(s => s.PersonID!=null, PageIndex, PageSize, Total);
+            return me;
         }
 
         public override void Add()
         {
             Serilog.Log.Information("打开窗口");
-            //var vm = dialogService.CreateViewModel<EditAddWindowViewModel>();
             ShowDialogAsync(viewModel => dialogService.ShowDialogAsync(this, viewModel));
         }
 
@@ -79,31 +68,58 @@ namespace LikeYou.WAWA.VIewModels
             base.Export();
         }
 
-        public override void Update()
+        public override async void Update()
         {
-            base.Update();
+            Models.Personinfo personinfo = Personinfos?.Find(s => s.IsSelect==true);
+            if(personinfo is null)
+            {
+                Growl.Warning("请选择人员！");
+                return;
+            }
+            ShowDialogAsync(viewModel => dialogService.ShowDialogAsync(this, viewModel), personinfo);
         }
+
+        public override void Select(int id)
+        {
+            var se= Personinfos?.Find(s => s.Id==id);
+            if(se !=null)
+            {
+                se.IsSelect=!se.IsSelect;
+            }
+           
+        }
+        public bool CheckAll
+        {
+            get => _checkAll;
+            set
+            {
+                SetProperty(ref _checkAll, value);
+                Personinfos?.ForEach(s => s.IsSelect=value);
+            }
+        }
+
+        private bool _checkAll; //全选
+
 
         public override void Delete()
         {
-            base.Delete();
+            if (CheckAll)
+            {
+                Personinfos=null;
+                Console.WriteLine("qqq");
+            }
         }
 
-        private async Task ShowDialogAsync(Func<EditAddWindowViewModel, Task<bool?>> showDialog)
+        private async Task ShowDialogAsync(Func<EditAddWindowViewModel, Task<bool?>> showDialog,Models.Personinfo personinfo=null)
         {
             var dialogViewModel = dialogService.CreateViewModel<EditAddWindowViewModel>();
-            dialogViewModel.Personinfo=new Models.Personinfo
+            if (personinfo!=null)
             {
-                Name="111",
-                DeptName="222"
-            };
-
-            
-
-            dialogViewModel.Title = "ssssss";
-            dialogViewModel.Text = "ttttt";
+                dialogViewModel.Personinfo = personinfo;
+                dialogViewModel.IsUpdate=true;
+            }
             bool? success = await showDialog(dialogViewModel);
-   
+            
         }
     }
 }

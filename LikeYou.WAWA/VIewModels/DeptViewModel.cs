@@ -21,7 +21,7 @@ namespace LikeYou.WAWA.VIewModels
                     Name="空空如也"
                 }
             };
-            SumPageCount(_deptments.Count);
+            SumPageCount();
         }
 
         public override void Search()

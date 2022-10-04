@@ -20,7 +20,7 @@ namespace LikeYou.WAWA.VIewModels
                     Name ="空空如也"
                 }
             };
-            SumPageCount(Models.Count);
+            SumPageCount();
         }
 
         public override void Add()

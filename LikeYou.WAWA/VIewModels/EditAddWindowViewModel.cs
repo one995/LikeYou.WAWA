@@ -31,7 +31,18 @@ namespace LikeYou.WAWA.VIewModels
 
         public EditAddWindowViewModel()
         {
+            if(personinfo is null)
+            {
+                personinfo=new Personinfo() { 
+                    PersonID=Common.CommonHelper.GuidTo16String(),
+                    Age=0,
+                    CreateUser=CommonHelper.logsInfo.UserName,
+                    UpdateUser=CommonHelper.logsInfo.UserName
+                };
+            }
         }
+        [ObservableProperty]
+        private bool isUpdate;
         [ObservableProperty]
         private string title;
 
@@ -64,16 +75,40 @@ namespace LikeYou.WAWA.VIewModels
                 Growl.Warning("邮箱不能为空！");
                 return;
             }
-            if (await Bll.DBCommon.PeronDao.Count(s => s.Name==personinfo.Name)>0)
+            if (!IsUpdate&&await Bll.DBCommon.PeronDao.Count(s => s.Name==personinfo.Name)>0)
             {
                 Growl.Warning("用户名已存在！");
                 return;
             }
-            if (await Bll.DBCommon.PeronDao.AddT(personinfo)>0)
+            if (!IsUpdate&&await Bll.DBCommon.PeronDao.Count(s => s.PersonID==personinfo.PersonID)>0)
+            {
+                Growl.Warning("用户名已存在！");
+                return;
+            }
+            bool su = false;
+            if (!IsUpdate&&await Bll.DBCommon.PeronDao.AddT(personinfo)>0)
+            {
+                su=true;
+            }
+            else
+            {
+               if( await Bll.DBCommon.PeronDao.Update(personinfo))
+                {
+                    su=true;
+                  
+                }
+              
+            }
+            if (su)
             {
                 dialogResult=true;
-                Ioc.Default.GetService<Common.ICommon.ILogger>().WriteToFileAndDB($"添加人员:{personinfo.Name}", "添加人员");
+                RequestClose?.Invoke(this, EventArgs.Empty);
+                string msg = IsUpdate ? "更新" : "新增";
+                string tip = $"{msg}人员:{personinfo.Name}";
+                Ioc.Default.GetService<Common.ICommon.ILogger>().WriteToFileAndDB(tip, "用户操作");
+                Growl.Success(tip);
             }
+    
 
         }
 

@@ -13,7 +13,9 @@ namespace LikeYou.WAWA.Models
     {
         [SugarColumn(IsIdentity = true, IsPrimaryKey = true)]
         public int Id { get; set; }
-
+        [SugarColumn(IsIgnore = true)]
+        public bool IsSelect { get; set; }
+      
         public string Name { get; set; }    
 
         public int Age { get; set; }

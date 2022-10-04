@@ -17,7 +17,10 @@ namespace LikeYou.WAWA.VIewModels
     public partial class BaseViewModel : ObservableObject
     {
         public RelayCommand<FunctionEventArgs<int>> PageUpdatedCmd => new((s) => PageUpdated(s));
-        public  RelayCommand SearchCmd => new( Search); 
+        public  RelayCommand SearchCmd => new( Search);
+        
+        public RelayCommand<int> IsSelectCmd => new((s)=>Select(s));
+       
         public RelayCommand ExportCmd => new( Export);
 
         public RelayCommand AddCmd =>  new (Add);
@@ -63,8 +66,14 @@ namespace LikeYou.WAWA.VIewModels
 #endif
         }
 
+        [ObservableProperty]
+        public SqlSugar.RefAsync<int> total = 0;
+
+        [ObservableProperty]
+        public  int  pageSize = 10;
+
         /// <summary>
-        ///     页码
+        ///     
         /// </summary>
         private Common.UserRole _roles;
 
@@ -106,8 +115,7 @@ namespace LikeYou.WAWA.VIewModels
 
         }
 
-      
-
+        public virtual void Select(int id) { }
         public virtual void Add()
         {
             Console.WriteLine(111);
@@ -127,9 +135,9 @@ namespace LikeYou.WAWA.VIewModels
 
         public virtual void Delete() { }
 
-        public virtual void SumPageCount(int total)
+        public virtual void SumPageCount()
         {
-           PageCount =  (total+10-1)/10;
+           PageCount =  (Total+PageSize-1)/PageSize;
         }
 
 

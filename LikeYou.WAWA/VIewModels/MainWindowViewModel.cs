@@ -25,6 +25,7 @@ namespace LikeYou.WAWA.VIewModels
             Title="首页";
             Common.CommonHelper.logsInfo = new Models.LoginUserInfo { UserName="admin" };
             LoadsDB();
+            this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative);
         }
         private void LoadsDB()
         {
@@ -41,7 +42,7 @@ namespace LikeYou.WAWA.VIewModels
 
         }
         public RelayCommand<FunctionEventArgs<object>> SwitchItemCmd => new(SwitchItem);
-
+         
         private void SwitchItem(FunctionEventArgs<object> info) {
 
             string page = (info.Info as SideMenuItem)?.Header.ToString();
@@ -83,7 +84,11 @@ namespace LikeYou.WAWA.VIewModels
              
                     this.MainActivePage=new Uri(@"../Pages/AboutPage.xaml", UriKind.Relative);
                     break;
+                case "系统管理":
+                    this.MainActivePage=new Uri(@"../Pages/AboutPage.xaml", UriKind.Relative);
+                    break;
                 default:
+                    this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative);
                     break;
             }
            
