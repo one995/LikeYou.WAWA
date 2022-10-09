@@ -1,4 +1,4 @@
-﻿<hc:PopupWindow x:Class="LikeYou.WAWA.MainWindow"
+﻿<hc:GlowWindow x:Class="LikeYou.WAWA.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,15 +6,19 @@
         xmlns:local="clr-namespace:LikeYou.WAWA"
         xmlns:vm="clr-namespace:LikeYou.WAWA.VIewModels"
         mc:Ignorable="d"
-        xmlns:hc="https://handyorg.github.io/handycontrol" 
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
                 Title="孤狼的远方" Height="800" Width="1200"  WindowStartupLocation="CenterScreen"
-         Style="{StaticResource BaseStyle}">
-    
+         
+                 Style="{StaticResource WindowGlow}"
+           Background="{DynamicResource SecondaryRegionBrush}"
+           ActiveGlowColor="{DynamicResource PrimaryColor}">
+
     <Window.Resources>
-        <Style TargetType="hc:SideMenuItem" >
-            <Setter Property="Background" Value="White"></Setter>
-        </Style>
+        <!--<Style TargetType="hc:SideMenuItem" >
+            <Setter Property="Background" Value="{DynamicResource SecondaryRegionBrush }"></Setter>
+            <Setter Property="gl" Value="{DynamicResource PrimaryColor }"></Setter>
+        </Style>-->
         <Style TargetType="TextBlock" x:Key="TextBlockFabricIcons" >
 
             <Setter Property="FontFamily" Value="/IconFontDemo;component/Resources/#SF2015"/>
@@ -22,24 +26,22 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="20"/>
-            
-
         </Style>
         <ResourceDictionary x:Key="Icon" Source="static/PicDictionary.xaml"/>
     </Window.Resources>
 
     <hc:TransitioningContentControl>
-    <Grid>
-        <Grid.Resources>
-            <vm:MainWindowViewModel x:Key="vModel" />
-        </Grid.Resources>
-        <Grid.DataContext>
-            <Binding Source="{StaticResource vModel}" />
-        </Grid.DataContext>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.1*" ></ColumnDefinition>
-            <ColumnDefinition  Width="0.9*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.Resources>
+                <vm:MainWindowViewModel x:Key="vModel" />
+            </Grid.Resources>
+            <Grid.DataContext>
+                <Binding Source="{StaticResource vModel}" />
+            </Grid.DataContext>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" ></ColumnDefinition>
+                <ColumnDefinition  Width="0.9*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*" ></RowDefinition>
@@ -106,75 +108,109 @@
 
             </Grid>
             <Grid Grid.Column="0" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*" ></RowDefinition>
-                <RowDefinition Height="0.9*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <hc:SideMenu BorderThickness="1"  Grid.Row="1"  Background="White" >
-                <hc:Interaction.Triggers>
-                    <hc:EventTrigger EventName="SelectionChanged">
-                        <hc:EventToCommand Command="{Binding SwitchItemCmd}" PassEventArgsToCommand="True" />
-                    </hc:EventTrigger>
-                </hc:Interaction.Triggers>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*" ></RowDefinition>
+                    <RowDefinition Height="0.9*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <hc:SideMenu BorderThickness="1"  Grid.Row="1"  Background="White" BorderBrush="SeaGreen" >
+                    <hc:SideMenu.Resources>
+                        <Color x:Key="PrimaryColor">#FFD80073</Color>
+                        <Color x:Key="DarkPrimaryColor">#FFD80073</Color>
+                        <LinearGradientBrush x:Key="PrimaryBrush" EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
+                            <GradientStop Color="{DynamicResource DarkPrimaryColor}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </hc:SideMenu.Resources>
+                    <hc:Interaction.Triggers>
+                        <hc:EventTrigger EventName="SelectionChanged">
+                            <hc:EventToCommand Command="{Binding SwitchItemCmd}" PassEventArgsToCommand="True" />
+                        </hc:EventTrigger>
+                    </hc:Interaction.Triggers>
 
-                <hc:SideMenuItem Header="首页"  >
-                    <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xf2cb;"  Style="{StaticResource TextBlockFabricIcons}"/>
-                    </hc:SideMenuItem.Icon>
+                    <hc:SideMenuItem Header="首页"  >
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xe7ae;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
 
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="用户"  >
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="角色" >
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <!--Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}"-->
-                <hc:SideMenuItem Header="权限管理"  >
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="组织管理" >
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="人员管理"   >
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xe7aa;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                        <hc:SideMenuItem Header="用户账号">
+                            <hc:SideMenuItem.Icon>
+                                <TextBlock Text="&#xeb8b;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <hc:SideMenuItem Header="管理员账户">
+                            <hc:SideMenuItem.Icon>
+                                <TextBlock Text="&#xeb8b;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="角色" >
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xeb6f;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                    <!--Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}"-->
+                    <hc:SideMenuItem Header="权限管理"  >
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xeb73;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="组织管理" >
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xeb67;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
                     <hc:SideMenuItem Header="菜单管理" >
                         <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
+                            <TextBlock Text="&#xeb62;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
                         </hc:SideMenuItem.Icon>
                     </hc:SideMenuItem>
                     <hc:SideMenuItem Header="聊天室" >
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xe82d;" Style="{StaticResource TextBlockFabricIcons}"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="关于">
-                    <hc:SideMenuItem.Icon>
-                        <TextBlock Text="&#xf444;" Style="{StaticResource TextBlockFabricIcons}"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xe7b4;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="系统管理" >
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xeb66;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                        <hc:SideMenuItem Header="系统设置">
+                            <hc:SideMenuItem.Icon>
+                                <TextBlock Text="&#xeb8d;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                        <hc:SideMenuItem Header="系统日志">
+                            <hc:SideMenuItem.Icon>
+                                <TextBlock Text="&#xeba2;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                            </hc:SideMenuItem.Icon>
+                        </hc:SideMenuItem>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="关于">
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xec21;"  FontFamily="{StaticResource IconFont}"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+
+                    </hc:SideMenuItem>
 
 
-            </hc:SideMenu>
-            <StackPanel Grid.Row="0">
-                <!--<Image Source="/Image/logol.png"></Image>-->
-   
-                <hc:TransitioningContentControl>
-                    <Viewbox Height="86" >
-                        <hc:Gravatar Style="{StaticResource GravatarCircle}" Source="/Image/logol.png" Height="30" Width="30"/>
-                        <!--<hc:AnimationPath VerticalAlignment="Center" Duration="0:0:6" Stretch="Uniform" Width="1024" Height="1024" StrokeThickness="10" Stroke="{DynamicResource PrimaryBrush}" Data="{StaticResource ClockGeometry}"/>-->
-                    </Viewbox>
-                </hc:TransitioningContentControl>
-            </StackPanel>
+                </hc:SideMenu>
+                <StackPanel Grid.Row="0">
+                    <!--<Image Source="/Image/logol.png"></Image>-->
+
+                    <hc:TransitioningContentControl>
+                        <Viewbox Height="86" >
+                            <hc:Gravatar Style="{StaticResource GravatarCircle}" Source="/Image/logol.png" Height="30" Width="30"/>
+                            <!--<hc:AnimationPath VerticalAlignment="Center" Duration="0:0:6" Stretch="Uniform" Width="1024" Height="1024" StrokeThickness="10" Stroke="{DynamicResource PrimaryBrush}" Data="{StaticResource ClockGeometry}"/>-->
+                        </Viewbox>
+                    </hc:TransitioningContentControl>
+                </StackPanel>
+
+            </Grid>
 
         </Grid>
-       
-    </Grid>
     </hc:TransitioningContentControl>
-</hc:PopupWindow>
+</hc:GlowWindow>

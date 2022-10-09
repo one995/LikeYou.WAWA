@@ -27,10 +27,12 @@ namespace LikeYou.WAWA.Dal
 
         public async Task<List<T>> GetPageList(Expression<Func<T, bool>> column, int pageIndex, int pageSize, RefAsync<int> totalCount) => await RWDb.Queryable<T>().Where(column).ToPageListAsync(pageIndex, pageSize, totalCount);
 
-        public async Task<List<T>> GetPageListWhere(Expression<Func<T, bool>> column, int pageIndex, int pageSize, RefAsync<int> totalCount, Expression<Func<T, bool>> wherecolumn1 = null, Expression<Func<T, bool>> wherecolumn2 = null, Expression<Func<T, bool>> wherecolumn3 = null) => await RWDb.Queryable<T>()
+        public async Task<List<T>> GetPageListWhere(Expression<Func<T, bool>> column, int pageIndex, int pageSize, RefAsync<int> totalCount, Expression<Func<T, bool>> wherecolumn1 = null, Expression<Func<T, bool>> wherecolumn2 = null, Expression<Func<T, bool>> wherecolumn3 = null, Expression<Func<T, bool>> wherecolumn4 = null, Expression<Func<T, bool>> wherecolumn5 = null) => await RWDb.Queryable<T>()
             .WhereIF(wherecolumn1!=null, wherecolumn1)
              .WhereIF(wherecolumn2!=null, wherecolumn2)
              .WhereIF(wherecolumn3!=null, wherecolumn3)
+              .WhereIF(wherecolumn4!=null, wherecolumn4)
+              .WhereIF(wherecolumn5!=null, wherecolumn5)
             .Where(column)
             .ToPageListAsync(pageIndex, pageSize, totalCount);
 

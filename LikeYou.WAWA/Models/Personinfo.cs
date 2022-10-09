@@ -13,8 +13,7 @@ namespace LikeYou.WAWA.Models
     {
         [SugarColumn(IsIdentity = true, IsPrimaryKey = true)]
         public int Id { get; set; }
-        [SugarColumn(IsIgnore = true)]
-        public bool IsSelect { get; set; }
+    
       
         public string Name { get; set; }    
 
@@ -35,5 +34,9 @@ namespace LikeYou.WAWA.Models
         public DateTime? UpdateTime { get; set; } = CommonHelper.GetDateTimeYYYYMMddHHmmss();
         [SugarColumn(IsNullable = true)]
         public string? UpdateUser { get; set; }
+
+        public int IsDelete { get; set; }
+        [SugarColumn(IsIgnore = true)]
+        public bool IsSelect { get; set; }
     }
 }

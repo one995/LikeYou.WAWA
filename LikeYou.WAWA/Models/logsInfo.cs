@@ -17,7 +17,7 @@ namespace LikeYou.WAWA.Models
             [SugarColumn(Length = 5000)]
             public string LogsMsg { get; set; }
 
-        public DateTime? CreateTime { get; set; } = Common.CommonHelper.GetDateTimeYYYYMMddHHmmss();
+            public DateTime? CreateTime { get; set; } = Common.CommonHelper.GetDateTimeYYYYMMddHHmmss();
 
             public string? CreateUser { get; set; }
 

@@ -1,0 +1,117 @@
+﻿<Page x:Class="LikeYou.WAWA.Pages.SystemInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LikeYou.WAWA.Pages"
+      mc:Ignorable="d" 
+       xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:st="clr-namespace:LikeYou.WAWA.Common"
+      d:DesignHeight="800" d:DesignWidth="1000"
+      Title="用户管理"
+   >
+    <Page.Resources>
+        <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
+    </Page.Resources>
+    <!--<Page.DataContext>
+        <Binding Source="{ Binding {StaticResource userViewModel}, Path=userViewModel } " />
+
+    </Page.DataContext>-->
+    <Grid Background="{StaticResource BackgroundBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel  Grid.Column="0"  HorizontalAlignment="Left"  Margin="10,0,30,10" >
+
+                <!--<TextBox Style="{StaticResource TextBoxExtend}" Text="Content"/>-->
+                <TextBox Margin="0,10,0,0" Text="{Binding S_Name}" Width="250"  hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="姓名" Style="{StaticResource TextBoxExtend}"/>
+                <TextBox Margin="0,10,0,0" Text="{Binding S_Eimal}" Width="250"  hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="邮箱" Style="{StaticResource TextBoxExtend}"/>
+
+            </StackPanel>
+            <StackPanel  Grid.Column="1"  HorizontalAlignment="Left"  Margin="32,0,10,10" >
+                <ComboBox Margin="0,10,0,0" Text="{Binding S_Dept}"  Width="250"  hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="部门" Style="{StaticResource ComboBoxExtend}" IsEditable="True" />
+                <ComboBox Margin="0,10,0,0" Text="{Binding S_Role}" ItemsSource="{ Binding Source={StaticResource UserRoles}}" Width="250" hc:InfoElement.Placeholder="Please Select Content}" hc:InfoElement.Title="角色" Style="{StaticResource ComboBoxExtend}" />
+
+            </StackPanel>
+            <StackPanel  Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Left"   >
+                <Button  Command="{ Binding SearchCmd}" Content="查 询" Style="{StaticResource ButtonInfo}" FontSize="15" Width="100" Height="40" Margin="10,10,10,10"/>
+                <Button Command="{Binding ExportCmd}" Content="导 出" Style="{StaticResource ButtonInfo}" FontSize="15" Width="100" Height="40" Margin="10,10,10,10" />
+            </StackPanel>
+        </Grid>
+        <!--<StackPanel Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal"   Margin="10,0,0,10">
+            <Button Command="{Binding AddCmd}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding UpdateCmd}" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
+            <Button Command="{Binding DeleteCmd}" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding ExportCmd}" Content="分配菜单" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
+        </StackPanel>-->
+        <DataGrid hc:Empty.ShowEmpty="true" Grid.Row="2"  IsReadOnly="True" Background="Transparent" BorderThickness="1"
+          hc:DataGridAttach.CanUnselectAllWithBlankArea="True" 
+          hc:DataGridAttach.ShowRowNumber="True"
+          HeadersVisibility="All" RowHeaderWidth="40" AutoGenerateColumns="False" 
+          SelectionMode="Single" SelectionUnit="FullRow"
+                  ItemsSource="{Binding Personinfos ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <!--<DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <CheckBox  IsChecked="{Binding IsSelect,RelativeSource={RelativeSource AncestorType=DataGridRow}}"  />
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>-->
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="Auto">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <CheckBox Content="全选" IsChecked="{Binding DataContext.CheckAll,Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"/>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTemplateColumn  Header="全选" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding IsSelect,Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <!--<DataGridCheckBoxColumn Width="100" CanUserResize="False" Binding="{Binding IsSelect}"  Header="是否选择">-->
+                <!--</DataGridCheckBoxColumn>-->
+                <!--<DataGridTextColumn IsReadOnly="True" Width="50" CanUserResize="False" Binding="{Binding Id}" Header="序号"/>-->
+                <DataGridTextColumn Width="*" CanUserResize="False" Binding="{Binding PersonID}" Header="用户编号" IsReadOnly="True" />
+                <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="姓名"  IsReadOnly="True"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Eamil}" Header="邮箱"/>
+                <DataGridTextColumn Width="*" Binding="{Binding DeptName}" Header="部门"/>
+                <DataGridTextColumn Width="*" Binding="{Binding UserRole}" Header="角色"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Age}" Header="年龄"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <hc:Pagination Grid.Row="3" MaxPageCount="{Binding PageCount}" PageIndex="{Binding PageIndex}"  IsJumpEnabled="False" HorizontalAlignment="Center" Margin="10" >
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="PageUpdated">
+                    <hc:EventToCommand Command="{Binding PageUpdatedCmd}" PassEventArgsToCommand="True" />
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+        </hc:Pagination>
+    </Grid>
+</Page>

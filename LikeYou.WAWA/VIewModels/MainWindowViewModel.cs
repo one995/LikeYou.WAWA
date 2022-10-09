@@ -34,6 +34,7 @@ namespace LikeYou.WAWA.VIewModels
                 Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.LogsInfo));//这样一个表就能成功创建了
                 Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.Personinfo));//这样一个表就能成功创建了
                 Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.Deptment));//这样一个表就能成功创建了
+                Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.RoleTypes));//这样一个表就能成功创建了
             }
             catch (Exception ex)
             {
@@ -58,7 +59,7 @@ namespace LikeYou.WAWA.VIewModels
                     //NavigationService.GetNavigationService(this).Navigate(new Pages.MainPage());//切换到Alice的页面
                     this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative) ;
                     break;
-                case "用户":
+                case "管理员账户":
                     this.MainActivePage=new Uri(@"../Pages/UserPage.xaml", UriKind.Relative);
                     break;
                 case "角色":      
@@ -86,6 +87,12 @@ namespace LikeYou.WAWA.VIewModels
                     break;
                 case "系统管理":
                     this.MainActivePage=new Uri(@"../Pages/AboutPage.xaml", UriKind.Relative);
+                    break;
+                case "系统设置":
+                    this.MainActivePage=new Uri(@"../Pages/SystemInfo.xaml", UriKind.Relative);
+                    break;
+                case "系统日志":
+                    this.MainActivePage=new Uri(@"../Pages/LogInfo.xaml", UriKind.Relative);
                     break;
                 default:
                     this.MainActivePage=new Uri(@"../Pages/MainPage.xaml", UriKind.Relative);

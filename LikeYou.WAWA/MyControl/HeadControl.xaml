@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LikeYou.WAWA.MyControl"
-            xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="800">
     <Grid Background="White">
@@ -12,6 +12,21 @@
             <ColumnDefinition Width="4*" ></ColumnDefinition>
             <ColumnDefinition Width="2*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBox  Grid.Column="0" HorizontalAlignment="Left" Margin="10,0,0,0"  hc:InfoElement.TitleWidth="20" Height="60" Width="250"  hc:InfoElement.Placeholder="Please Enter Content}"  hc:InfoElement.Title="人员信息" hc:InfoElement.Necessary="True" Style="{StaticResource TextBoxExtend}"/>
+        <hc:SideMenu BorderThickness="1" Width="200" Margin="32"  Grid.Column="0">
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="SelectionChanged">
+                    <hc:EventToCommand Command="{Binding SwitchItemCmd}" PassEventArgsToCommand="True" />
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+            <hc:SideMenuItem Header="Overview">s
+                <hc:SideMenuItem Header="Summary" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                    <hc:SideMenuItem.Icon>
+                        <TextBlock Text="&#xf2cb;" Style="{StaticResource TextBlockFabricIcons}"/>
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+
+            </hc:SideMenuItem>
+        </hc:SideMenu >
+        <!--<TextBox  Grid.Column="0" HorizontalAlignment="Left" Margin="10,0,0,0"  hc:InfoElement.TitleWidth="20" Height="60" Width="250"  hc:InfoElement.Placeholder="Please Enter Content}"  hc:InfoElement.Title="人员信息" hc:InfoElement.Necessary="True" Style="{StaticResource TextBoxExtend}"/>-->
     </Grid>
 </UserControl>

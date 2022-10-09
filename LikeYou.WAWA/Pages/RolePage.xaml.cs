@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using LikeYou.WAWA.VIewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ namespace LikeYou.WAWA.Pages
         public RolePage()
         {
             InitializeComponent();
+            this.DataContext= Ioc.Default.GetRequiredService<RoleViewModel>();
         }
     }
 }

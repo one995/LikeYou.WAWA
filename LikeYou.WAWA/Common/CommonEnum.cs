@@ -16,7 +16,8 @@ namespace LikeYou.WAWA.Common
         超级管理员,
         管理员,
         操作员,
-        用户
+        用户,
+        无
     }
 
     public enum MeunType
@@ -32,6 +33,11 @@ namespace LikeYou.WAWA.Common
         Debug,
         Warning,
         UserDao,
+    }
 
+    public enum RoleStatusType
+    {
+        正常,
+        弃用
     }
 }

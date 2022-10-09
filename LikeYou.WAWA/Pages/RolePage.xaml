@@ -14,13 +14,13 @@
 
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.Resources>
-            <vm:RoleViewModel x:Key="vModel" />
+            <!--<vm:RoleViewModel x:Key="vModel" />-->
             <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
         </Grid.Resources>
-        <Grid.DataContext>
+        <!--<Grid.DataContext>
             <Binding Source="{StaticResource vModel}" />
 
-        </Grid.DataContext>
+        </Grid.DataContext>-->
         <Grid.RowDefinitions>
             <!--<RowDefinition Height="2*"></RowDefinition>-->
             <RowDefinition Height="1*"></RowDefinition>
@@ -28,19 +28,38 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal" >
+        <StackPanel Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal"  Margin="10,0,0,10" >
             <Button Command="{ Binding AddCmd}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
             <Button Command="{Binding UpdateCmd}" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
             <Button Command="{Binding DeleteCmd}" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"       />
         </StackPanel>
-        <DataGrid Grid.Row="1" hc:Empty.ShowEmpty="true"  HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" ItemsSource="{Binding DataList}">
-            <DataGrid.RowHeaderTemplate>
-                <DataTemplate>
-                    <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
-                </DataTemplate>
-            </DataGrid.RowHeaderTemplate>
+        <DataGrid Grid.Row="1" hc:Empty.ShowEmpty="true"  HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" IsReadOnly="True"
+                      hc:DataGridAttach.CanUnselectAllWithBlankArea="True" 
+          hc:DataGridAttach.ShowRowNumber="True"
+ 
+          SelectionMode="Single" SelectionUnit="FullRow"
+                  ItemsSource="{Binding Datalist,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Width="*" CanUserResize="False" Binding="{Binding Id}" Header="序号"/>
+                <DataGridTemplateColumn Width="Auto">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <CheckBox Content="全选" IsChecked="{Binding DataContext.CheckAll,Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"/>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTextColumn IsReadOnly="True" Width="*" CanUserResize="False" Binding="{Binding Id}" Header="序号"/>-->
                 <!--<DataGridTemplateColumn Width="60" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -51,7 +70,7 @@
                 <DataGridTextColumn Width="*" CanUserResize="False" Binding="{Binding RoleUUID}" Header="角色UUID"/>
                 <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="名称"/>
                 <DataGridTextColumn Width="*" Binding="{Binding Type}" Header="角色类型"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Description}" Header="备注"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Description}" Header="备注" MinWidth="250"/>
                 <DataGridTextColumn Width="*" Binding="{Binding Status}" Header="状态"/>
                 <!--<DataGridTextColumn Width="*" Binding="{Binding Age}" Header="年龄"/>-->
                 <!--<DataGridCheckBoxColumn Width="100" CanUserResize="False" Binding="{Binding IsSelected}" Header="是否选择"/>-->

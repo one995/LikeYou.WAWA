@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HandyControl.Data;
+using HanumanInstitute.MvvmDialogs;
 using HanumanInstitute.MvvmDialogs.Wpf;
 
 namespace LikeYou.WAWA.VIewModels
@@ -16,6 +17,7 @@ namespace LikeYou.WAWA.VIewModels
 
     public partial class BaseViewModel : ObservableObject
     {
+        public  IDialogService dialogService;
         public RelayCommand<FunctionEventArgs<int>> PageUpdatedCmd => new((s) => PageUpdated(s));
         public  RelayCommand SearchCmd => new( Search);
         
@@ -66,8 +68,25 @@ namespace LikeYou.WAWA.VIewModels
 #endif
         }
 
-        [ObservableProperty]
-        public SqlSugar.RefAsync<int> total = 0;
+        /// <summary>
+        ///     页面总数
+        /// </summary>
+        private SqlSugar.RefAsync<int> _total = 0;
+
+        /// <summary>
+        ///     页面总数
+        /// </summary>
+        public SqlSugar.RefAsync<int> Total
+        {
+            get => _total;
+#if NET40
+            set => Set(nameof(PageIndex), ref _pageIndex, value);
+#else
+            set { SetProperty(ref _total, value); SumPageCount(); }
+#endif
+        }
+        //[ObservableProperty]
+        //public SqlSugar.RefAsync<int> total = 0;
 
         [ObservableProperty]
         public  int  pageSize = 10;
@@ -86,7 +105,7 @@ namespace LikeYou.WAWA.VIewModels
 #if NET40
             set => Set(nameof(PageIndex), ref _pageIndex, value);
 #else
-            set => SetProperty(ref _roles, value);
+            set { SetProperty(ref _roles, value);  }
 #endif
         }
         #region commamd
@@ -140,8 +159,26 @@ namespace LikeYou.WAWA.VIewModels
            PageCount =  (Total+PageSize-1)/PageSize;
         }
 
+        /// <summary>
+        /// 执行全选方法
+        /// </summary>
+        public bool CheckAll
+        {
+            get => _checkAll;
+            set
+            {
+                SetProperty(ref _checkAll, value);
+                CheckAllAction();
+            }
+        }
 
-      
+        private bool _checkAll; //全选
+        /// <summary>
+        /// 子类重写重选方法
+        /// </summary>
+        public virtual void CheckAllAction() { }
+
+
         #endregion
     }
 }

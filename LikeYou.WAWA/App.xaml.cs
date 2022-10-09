@@ -82,7 +82,10 @@ namespace LikeYou.WAWA
             //.AddSingleton<IDialogService, DialogService>()
              .AddTransient<Pages.Dialogs.AddUserControl>()
             .AddTransient<UserViewModel>()
+              .AddTransient<RoleViewModel>()
+                .AddTransient<LogInfoViewModel>()
              .AddTransient<EditAddWindowViewModel>()
+              .AddTransient<EditRoleWindowViewModel>()
             .AddSingleton(new Appsettings(basePath));
 
    

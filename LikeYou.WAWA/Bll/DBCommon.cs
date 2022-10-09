@@ -13,5 +13,7 @@ namespace LikeYou.WAWA.Bll
 
         public static Dal.BaseDao<Models.LogsInfo> LogsDao { get { return new Dal.BaseDao<Models.LogsInfo>(); } }
 
+        public static Dal.BaseDao<Models.RoleTypes> RoleDao { get { return new Dal.BaseDao<Models.RoleTypes>(); } }
+
     }
 }
