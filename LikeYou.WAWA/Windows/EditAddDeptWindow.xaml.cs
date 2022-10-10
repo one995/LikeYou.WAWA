@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.DependencyInjection;
-using LikeYou.WAWA.VIewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LikeYou.WAWA.Pages
+namespace LikeYou.WAWA.Windows
 {
     /// <summary>
-    /// DeptPage.xaml 的交互逻辑
+    /// EditAddDeptWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class DeptPage : Page
+    public partial class EditAddDeptWindow : Window
     {
-        public DeptPage()
+        public EditAddDeptWindow()
         {
             InitializeComponent();
-            this.DataContext= Ioc.Default.GetRequiredService<DeptViewModel>();
         }
     }
 }

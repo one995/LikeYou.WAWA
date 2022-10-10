@@ -81,12 +81,14 @@ namespace LikeYou.WAWA
                     viewModelFactory: x => Ioc.Default.GetService(x)))
             //.AddSingleton<IDialogService, DialogService>()
              .AddTransient<Pages.Dialogs.AddUserControl>()
-            .AddTransient<UserViewModel>()
-              .AddTransient<RoleViewModel>()
-                .AddTransient<LogInfoViewModel>()
+             .AddTransient<UserViewModel>()
+             .AddTransient<RoleViewModel>()
+             .AddTransient<LogInfoViewModel>()
+             .AddTransient<DeptViewModel>()
              .AddTransient<EditAddWindowViewModel>()
-              .AddTransient<EditRoleWindowViewModel>()
-            .AddSingleton(new Appsettings(basePath));
+             .AddTransient<EditRoleWindowViewModel>()
+                 .AddTransient<EditAddDeptWindowViewModel>()
+             .AddSingleton(new Appsettings(basePath));
 
    
             Ioc.Default.ConfigureServices(services.BuildServiceProvider());

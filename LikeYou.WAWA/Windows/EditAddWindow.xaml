@@ -10,7 +10,8 @@
          d:DataContext="{d:DesignInstance {x:Type vm:EditAddWindowViewModel}}"
         xmlns:st="clr-namespace:LikeYou.WAWA.Common"
         mc:Ignorable="d"
-         Height="450" Width="550" WindowStartupLocation="CenterScreen">
+         Height="450" Width="550" WindowStartupLocation="CenterScreen" Title="{Binding Title}">
+
     <Grid >
         <Grid.Resources>
             <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
@@ -39,11 +40,15 @@
                 <TextBox  Margin="0,10,0,0" Text="{Binding Personinfo.UpdateTime,Mode=TwoWay}"  IsReadOnly="True" Width="250" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="更新时间" Style="{StaticResource TextBoxExtend}"/>
                 <TextBox  Margin="0,10,0,0" Text="{Binding Personinfo.UpdateUser,Mode=TwoWay}"   IsReadOnly="True" Width="250" hc:InfoElement.TitleWidth="140" hc:InfoElement.Placeholder="Please Enter Content"  hc:InfoElement.Title="更新人" Style="{StaticResource TextBoxExtend}"/>
             </StackPanel>
+
         </Grid>
 
         <StackPanel Grid.Row="1"  VerticalAlignment="Top" HorizontalAlignment="Center"  Orientation="Horizontal" >
-            <Button Command="{Binding AddCmd}" Content="确 定" Style="{StaticResource ButtonInfo}" FontSize="15"   Width="100"  Height="40" Margin="0,0,10,0"    />
-            <Button Command="{Binding CanelCmd}" Content="取 消" Style="{StaticResource ButtonWarning}" FontSize="15"  Width="100"  Height="40" Margin="0,0,10,0" />
+            <Button  Command="{ Binding ExetenCmd}"  CommandParameter="确定" Content="确 定" Style="{StaticResource ButtonInfo}" FontSize="15"   Width="100"  Height="40" Margin="0,0,10,0"    />
+            <Button Command="{ Binding ExetenCmd}"  CommandParameter="取消" Content="取 消" Style="{StaticResource ButtonWarning}" FontSize="15"  Width="100"  Height="40" Margin="0,0,10,0" />
         </StackPanel>
-    </Grid>
+    </Grid >
+
+
+
 </Window>

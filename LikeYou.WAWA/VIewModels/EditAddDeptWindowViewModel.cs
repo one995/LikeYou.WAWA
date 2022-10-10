@@ -1,53 +1,41 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.DependencyInjection;
-using CommunityToolkit.Mvvm.Input;
+using DryIoc.ImTools;
 using HandyControl.Controls;
+using HanumanInstitute.MvvmDialogs;
 using LikeYou.WAWA.Common;
 using LikeYou.WAWA.Models;
-using LikeYou.WAWA.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Mvvm.Messaging.Messages;
-using HanumanInstitute.MvvmDialogs;
-using Google.Protobuf.WellKnownTypes;
-using System.Windows.Forms;
-using LikeYou.WAWA.Bll;
-using static System.Net.Mime.MediaTypeNames;
-
 
 namespace LikeYou.WAWA.VIewModels
 {
-    public partial class EditAddWindowViewModel : BaseViewModel, IModalDialogViewModel, ICloseable
+    public partial class EditAddDeptWindowViewModel : BaseViewModel, IModalDialogViewModel, ICloseable
     {
         //新增编辑 viewmodel
 
         [ObservableProperty]
-        private Models.Personinfo? personinfo;
-
+        private Models.Deptment? deptment;
         /// <summary>
         /// 0 新增人员 1 新增组织 2、
         /// </summary>
-        public EditAddWindowViewModel()
+        public EditAddDeptWindowViewModel()
         {
             //addType=_addType;
-           
-                    if (!isUpdate)
-                    {
-                        personinfo =new Personinfo()
-                        {
-                            PersonID=Common.CommonHelper.GuidTo16String(),
-                            Age=0,
-                            CreateUser=CommonHelper.logsInfo.UserName,
-                            UpdateUser=CommonHelper.logsInfo.UserName
-                        };
-                    }
 
-            
+            if (!isUpdate)
+            {
+                deptment =new Deptment()
+                {
+                    UUID=Common.CommonHelper.GuidTo16String()
+                };
+            }
+
+
         }
         /// <summary>
         /// 修改
@@ -74,56 +62,50 @@ namespace LikeYou.WAWA.VIewModels
 
         public event EventHandler? RequestClose;
 
-        public override  void Add()
+        public override void Add()
         {
-            AddPerson();
-
+            AddDept();
         }
 
-        #region 新增人员操作
 
-        private async void AddPerson()
+        #region 新增组织
+
+        private async void AddDept()
         {
-            if (string.IsNullOrEmpty(personinfo?.Name))
+            if (string.IsNullOrEmpty(deptment?.Name))
             {
-                Growl.Warning("用户名不能为空！");
+                Growl.Warning("组织名不能为空！");
                 return;
             }
-            if (string.IsNullOrEmpty(personinfo?.Eamil))
+            if (string.IsNullOrEmpty(deptment?.Description))
             {
-                Growl.Warning("邮箱不能为空！");
+                Growl.Warning("详情不能为空！");
                 return;
             }
-            if (!IsUpdate&&await Bll.DBCommon.PeronDao.Count(s => s.Name==personinfo.Name)>0)
+            if (!IsUpdate&&await Bll.DBCommon.DeptDao.Count(s => s.Name==deptment.Name)>0)
             {
-                Growl.Warning("用户名已存在！");
-                return;
-            }
-            if (!IsUpdate&&await Bll.DBCommon.PeronDao.Count(s => s.PersonID==personinfo.PersonID)>0)
-            {
-                Growl.Warning("用户名已存在！");
+                Growl.Warning("组织名已存在！");
                 return;
             }
             bool su = false;
-            if (!IsUpdate&&await Bll.DBCommon.PeronDao.AddT(personinfo)>0)
+            if (!IsUpdate&&await Bll.DBCommon.DeptDao.AddT(deptment)>0)
             {
                 su=true;
             }
             else
             {
-                if (await Bll.DBCommon.PeronDao.Update(personinfo))
+                if (await Bll.DBCommon.DeptDao.Update(deptment))
                 {
                     su=true;
 
                 }
-
             }
             if (su)
             {
                 dialogResult=true;
                 RequestClose?.Invoke(this, EventArgs.Empty);
                 string msg = IsUpdate ? "更新" : "新增";
-                string tip = $"{msg}人员:{personinfo.Name}";
+                string tip = $"{msg}组织:{deptment.Name}";
                 Ioc.Default.GetService<Common.ICommon.ILogger>().WriteToFileAndDB(tip, "用户操作");
                 Growl.Success(tip);
             }
@@ -137,6 +119,5 @@ namespace LikeYou.WAWA.VIewModels
             RequestClose?.Invoke(this, EventArgs.Empty);
 
         }
-
     }
 }

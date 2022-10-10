@@ -21,5 +21,7 @@ namespace LikeYou.WAWA.Models
         public string Perent { get; set; }
         [SugarColumn(IsNullable = true)]
         public string EearchText { get; set; }
+        [SugarColumn(IsIgnore =true)]
+        public bool IsSelect { get;  set; }
     }
 }

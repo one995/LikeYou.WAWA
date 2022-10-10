@@ -29,11 +29,11 @@
         <Grid Grid.Row="0">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="6*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition ></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="4,0,0,0" >
+            <Grid Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="6" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
@@ -54,8 +54,8 @@
             </Grid>
             
             <StackPanel   Grid.Column="1"    VerticalAlignment="Center" HorizontalAlignment="Left"   >
-                <Button  Command="{ Binding SearchCmd}" Content="查 询" Style="{StaticResource ButtonInfo}" FontSize="15" Width="100" Height="40" Margin="10,10,10,10"/>
-                <Button Command="{Binding ExportCmd}" Content="导 出" Style="{StaticResource ButtonInfo}" FontSize="15" Width="100" Height="40" Margin="10,10,10,10" />
+                <Button  Command="{ Binding ExetenCmd}"  CommandParameter="查询"  Content="查 询" Style="{StaticResource ButtonInfo}" FontSize="15" Width="80" Height="30" Margin="10,10,10,10"/>
+                <Button Command="{ Binding ExetenCmd}"  CommandParameter="导出"  Content="导 出" Style="{StaticResource ButtonInfo}" FontSize="15" Width="80" Height="30" Margin="10,10,10,10" />
             </StackPanel>
         </Grid>
         <!--<StackPanel Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal"   Margin="10,0,0,10">
@@ -111,7 +111,7 @@
                 <DataGridTextColumn Width="3*" Binding="{Binding LogsMsg }" Header="日志内容"/>
                 <DataGridTextColumn Width="*" Binding="{Binding CreateUser}" Header="操作人"/>
                 <DataGridTextColumn Width="*" Binding="{Binding FlagMsg}" Header="关键字"/>
-                <DataGridTextColumn Width="*" Binding="{Binding CreateTime}" Header="创建时间"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Path=CreateTime,StringFormat='yyyy年MM月dd日 HH:mm:ss'}" Header="创建时间"/>
 
             </DataGrid.Columns>
         </DataGrid>

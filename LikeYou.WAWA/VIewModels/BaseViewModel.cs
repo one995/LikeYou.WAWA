@@ -19,19 +19,11 @@ namespace LikeYou.WAWA.VIewModels
     {
         public  IDialogService dialogService;
         public RelayCommand<FunctionEventArgs<int>> PageUpdatedCmd => new((s) => PageUpdated(s));
-        public  RelayCommand SearchCmd => new( Search);
-        
-        public RelayCommand<int> IsSelectCmd => new((s)=>Select(s));
-       
-        public RelayCommand ExportCmd => new( Export);
+        public  RelayCommand SearchCmd => new(Search);
 
-        public RelayCommand AddCmd =>  new (Add);
+        public RelayCommand<string> ExetenCmd => new((s)=>Exeten(s));
 
-        public RelayCommand CanelCmd => new(Canel);
 
-        public RelayCommand UpdateCmd => new ( Update);
-
-        public RelayCommand DeleteCmd =>  new (Delete);
         /// <summary>
         ///     页码
         /// </summary>
@@ -119,6 +111,45 @@ namespace LikeYou.WAWA.VIewModels
 
 
         }
+
+        public virtual void Exeten(String fNAME)
+        {
+            switch (fNAME)
+            {
+                case "新增":
+                case "确定":
+                    Add();
+                    break;
+                case "修改":
+                    Update();
+                    break;
+                case "删除":
+                    Delete();
+                    break;
+                case "查询":
+                    Search();
+                    break;
+                case "导出":
+                    Export();
+                    break;
+                case "取消":
+                    Canel();
+                    break;
+                case "分配菜单":
+                case "分配组织":
+                case "分配权限":
+                    Other();
+                    break;
+
+            }
+        }
+
+        public virtual void Other()
+        {
+
+        }
+
+
         /// <summary>
         /// 查询方法
         /// </summary>

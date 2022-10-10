@@ -17,6 +17,7 @@ using HanumanInstitute.MvvmDialogs;
 using HandyControl.Controls;
 using SqlSugar;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows;
 
 namespace LikeYou.WAWA.VIewModels
 {
@@ -106,8 +107,12 @@ namespace LikeYou.WAWA.VIewModels
         {
             if (CheckAll)
             {
+                if (HandyControl.Controls.MessageBox.Show($"确定全部删除？", "提示", MessageBoxButton.OKCancel) ==MessageBoxResult.Cancel)
+                {
+                    return;
+                }
                 //Personinfos=null;
-                foreach(Models.Personinfo personinfo in Personinfos)
+                foreach (Models.Personinfo personinfo in Personinfos)
                 {
                     personinfo.IsDelete=1;
                     if (await Bll.DBCommon.PeronDao.UpdateColumns(personinfo))
@@ -130,7 +135,11 @@ namespace LikeYou.WAWA.VIewModels
                     Growl.Warning("请选择人员！");
                     return;
                 }
-                personinfo.IsDelete=1;
+                if (HandyControl.Controls.MessageBox.Show($"确定{personinfo.Name}删除？", "提示", MessageBoxButton.OKCancel) ==MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+                    personinfo.IsDelete=1;
                 if (await Bll.DBCommon.PeronDao.UpdateColumns(personinfo))
                 {
                     Ioc.Default.GetService<Common.ICommon.ILogger>().WriteToFileAndDB($"删除{personinfo.Name}成功", "用户操作");
@@ -148,6 +157,7 @@ namespace LikeYou.WAWA.VIewModels
         private async Task ShowDialogAsync(Func<EditAddWindowViewModel, Task<bool?>> showDialog,Models.Personinfo personinfo=null)
         {
             var dialogViewModel = dialogService.CreateViewModel<EditAddWindowViewModel>();
+            dialogViewModel.Title="新增人员";
             if (personinfo!=null)
             {
                 dialogViewModel.Personinfo = personinfo;

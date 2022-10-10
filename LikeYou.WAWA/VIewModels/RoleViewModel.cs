@@ -69,8 +69,12 @@ namespace LikeYou.WAWA.VIewModels
 
             if (CheckAll)
             {
-                //Personinfos=null;
-                foreach (Models.RoleTypes personinfo in Datalist)
+                if (HandyControl.Controls.MessageBox.Show($"确定全部删除？", "提示", MessageBoxButton.OKCancel) ==MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+                    //Personinfos=null;
+                    foreach (Models.RoleTypes personinfo in Datalist)
                 {
                     personinfo.IsDelete=1;
                     if (await Bll.DBCommon.RoleDao.UpdateColumns(personinfo))

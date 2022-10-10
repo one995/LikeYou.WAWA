@@ -105,45 +105,6 @@ namespace LikeYou.WAWA.VIewModels
 
         public override async void Delete()
         {
-            //if (CheckAll)
-            //{
-            //    //Personinfos=null;
-            //    foreach (Models.Personinfo personinfo in Personinfos)
-            //    {
-            //        personinfo.IsDelete=1;
-            //        if (await Bll.DBCommon.PeronDao.UpdateColumns(personinfo))
-            //        {
-            //            Ioc.Default.GetService<Common.ICommon.ILogger>().WriteToFileAndDB($"删除{personinfo.Name}成功", "用户操作");
-            //            Growl.Success("删除成功！");
-            //        }
-            //        else
-            //        {
-            //            Growl.Error("删除失败！");
-            //        }
-            //    }
-
-            //}
-            //else
-            //{
-            //    Models.Personinfo personinfo = Personinfos?.Find(s => s.IsSelect==true);
-            //    if (personinfo is null)
-            //    {
-            //        Growl.Warning("请选择人员！");
-            //        return;
-            //    }
-            //    personinfo.IsDelete=1;
-            //    if (await Bll.DBCommon.PeronDao.UpdateColumns(personinfo))
-            //    {
-            //        Ioc.Default.GetService<Common.ICommon.ILogger>().WriteToFileAndDB($"删除{personinfo.Name}成功", "用户操作");
-            //        Growl.Success("删除成功！");
-            //    }
-            //    else
-            //    {
-            //        Growl.Error("删除失败！");
-            //    }
-
-            //}
-            //GetPersoninfos();
         }
 
         private async Task ShowDialogAsync(Func<EditAddWindowViewModel, Task<bool?>> showDialog, Models.Personinfo personinfo = null)

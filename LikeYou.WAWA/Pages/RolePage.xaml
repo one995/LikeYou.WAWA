@@ -29,9 +29,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal"  Margin="10,0,0,10" >
-            <Button Command="{ Binding AddCmd}" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
-            <Button Command="{Binding UpdateCmd}" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
-            <Button Command="{Binding DeleteCmd}" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"       />
+            <Button  Command="{ Binding ExetenCmd}"  CommandParameter="新增" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button  Command="{ Binding ExetenCmd}"  CommandParameter="修改" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
+            <Button  Command="{ Binding ExetenCmd}"  CommandParameter="删除"  Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"       />
         </StackPanel>
         <DataGrid Grid.Row="1" hc:Empty.ShowEmpty="true"  HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" IsReadOnly="True"
                       hc:DataGridAttach.CanUnselectAllWithBlankArea="True" 
