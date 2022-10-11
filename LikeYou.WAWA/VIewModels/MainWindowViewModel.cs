@@ -35,6 +35,7 @@ namespace LikeYou.WAWA.VIewModels
                 Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.Personinfo));//这样一个表就能成功创建了
                 Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.Deptment));//这样一个表就能成功创建了
                 Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.RoleTypes));//这样一个表就能成功创建了
+                Common.DBHelper._instance.RWscope.CodeFirst.SetStringDefaultLength(200).InitTables(typeof(Models.MeunModel));//这样一个表就能成功创建了
             }
             catch (Exception ex)
             {

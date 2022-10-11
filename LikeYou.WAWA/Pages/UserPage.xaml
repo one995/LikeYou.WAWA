@@ -54,7 +54,7 @@
             <Button Command="{Binding ExetenCmd}"   CommandParameter="新增" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
             <Button Command="{Binding ExetenCmd}"  CommandParameter="修改" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
             <Button Command="{Binding ExetenCmd}"  CommandParameter="删除" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
-            <Button Command="{Binding ExetenCmd}"  CommandParameter="分配菜单" Content="分配菜单" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
+            <Button Command="{Binding ExetenCmd}"  CommandParameter="分配菜单" Content="分配角色" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
         </StackPanel>
         <DataGrid hc:Empty.ShowEmpty="true" Grid.Row="2"  IsReadOnly="True" Background="Transparent" BorderThickness="1"
           hc:DataGridAttach.CanUnselectAllWithBlankArea="True" 

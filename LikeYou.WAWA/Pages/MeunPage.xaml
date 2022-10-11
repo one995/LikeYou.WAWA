@@ -15,16 +15,16 @@
 
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.Resources>
-            <vm:MeunViewModel x:Key="vModel" />
+            <!--<vm:MeunViewModel x:Key="vModel" />-->
             <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
         </Grid.Resources>
-        <Grid.DataContext>
+        <!--<Grid.DataContext>
             <Binding Source="{StaticResource vModel}" />
 
-        </Grid.DataContext>
+        </Grid.DataContext>-->
         <Grid.RowDefinitions>
             <!--<RowDefinition Height="2*"></RowDefinition>-->
-            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
             <RowDefinition Height="0.8*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -52,20 +52,42 @@
                 --><!--<Button Command="{Binding ExportCmd}" Content="导 出" Style="{StaticResource ButtonPrimary}" FontSize="15" Width="100" Height="30" Margin="10,10,10,10"/>--><!--
             </StackPanel>
         </Grid>-->
-        <StackPanel Grid.Row="0"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal" >
-            <Button Command="{Binding AddCmd}" CommandParameter="新增" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
-            <Button Command="{Binding UpdateCmd}" CommandParameter="修改" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
-            <Button Command="{Binding DeleteCmd}" CommandParameter="删除" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
-            <Button Command="{Binding ExportCmd}" CommandParameter="分配菜单" Content="分配组织" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
+        <StackPanel Grid.Row="0"  VerticalAlignment="Bottom" HorizontalAlignment="Left"  Orientation="Horizontal" Margin="6" >
+            <Button Command="{Binding ExetenCmd}" CommandParameter="新增" Content="新增" Style="{StaticResource ButtonInfo}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding ExetenCmd}" CommandParameter="修改" Content="修改" Style="{StaticResource ButtonWarning}" FontSize="15"   Margin="0,0,10,0" />
+            <Button Command="{Binding ExetenCmd}" CommandParameter="删除" Content="删除" Style="{StaticResource ButtonDanger}" FontSize="15"    Margin="0,0,10,0"    />
+            <Button Command="{Binding ExetenCmd}" CommandParameter="分配菜单" Content="分配组织" Style="{StaticResource ButtonSuccess}" FontSize="15"     />
         </StackPanel>
-        <DataGrid  hc:Empty.ShowEmpty="True" Grid.Row="1"   HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" ItemsSource="{Binding Models}">
-            <DataGrid.RowHeaderTemplate>
+        <DataGrid  hc:Empty.ShowEmpty="True" Grid.Row="1" IsReadOnly="True" Background="Transparent" BorderThickness="1"
+          hc:DataGridAttach.CanUnselectAllWithBlankArea="True" 
+          hc:DataGridAttach.ShowRowNumber="True"
+          HeadersVisibility="All" RowHeaderWidth="40" AutoGenerateColumns="False" 
+          SelectionMode="Single" SelectionUnit="FullRow" ItemsSource="{Binding MeunDatas}">
+            <!--<DataGrid.RowHeaderTemplate>
                 <DataTemplate>
                     <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
                 </DataTemplate>
-            </DataGrid.RowHeaderTemplate>
+            </DataGrid.RowHeaderTemplate>-->
             <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Width="*" CanUserResize="False" Binding="{Binding Id}" Header="序号"/>
+                <DataGridTemplateColumn Width="Auto">
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <CheckBox Content="全选" IsChecked="{Binding DataContext.CheckAll,Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Page}}}"/>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <!--<DataGridTemplateColumn Width="60" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -76,9 +98,10 @@
                 <!--<DataGridTextColumn Width="*" CanUserResize="False" Binding="{Binding Id}" Header="序号"/>-->
                 <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="名称"/>
                 <DataGridTextColumn Width="*" Binding="{Binding Perent}" Header="父级ID"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Flag}" Header="标志"/>
+               
                 <DataGridTextColumn Width="*" Binding="{Binding type}" Header="菜单类型"/>
                 <DataGridTextColumn Width="*" Binding="{Binding Url}" Header="菜单URL"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Description}" Header="描述"/>
                 <!--<DataGridTextColumn Width="*" Binding="{Binding Age}" Header="年龄"/>-->
                 <!--<DataGridCheckBoxColumn Width="100" CanUserResize="False" Binding="{Binding IsSelected}" Header="是否选择"/>-->
                 <!--<DataGridComboBoxColumn ItemsSource="{Binding  }" Width="100" CanUserResize="False" SelectedValueBinding="{Binding UserRole}" Header="角色"/>-->

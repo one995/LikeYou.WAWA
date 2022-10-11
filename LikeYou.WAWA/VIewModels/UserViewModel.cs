@@ -154,6 +154,17 @@ namespace LikeYou.WAWA.VIewModels
              GetPersoninfos();
         }
 
+        public override void Other()
+        {
+            Models.Personinfo personinfo = Personinfos?.Find(s => s.IsSelect==true);
+            if (personinfo is null)
+            {
+                Growl.Warning("请选择人员！");
+                return;
+            }
+            ShowDialogAsync(viewModel => dialogService.ShowDialogAsync(this, viewModel), personinfo);
+        }
+
         private async Task ShowDialogAsync(Func<EditAddWindowViewModel, Task<bool?>> showDialog,Models.Personinfo personinfo=null)
         {
             var dialogViewModel = dialogService.CreateViewModel<EditAddWindowViewModel>();

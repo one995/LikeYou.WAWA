@@ -19,6 +19,7 @@ using LikeYou.WAWA.VIewModels;
 using HanumanInstitute.MvvmDialogs.Wpf;
 using DialogService = HanumanInstitute.MvvmDialogs.Wpf.DialogService;
 using HanumanInstitute.MvvmDialogs;
+using LikeYou.WAWA.Windows;
 
 namespace LikeYou.WAWA
 {
@@ -85,9 +86,12 @@ namespace LikeYou.WAWA
              .AddTransient<RoleViewModel>()
              .AddTransient<LogInfoViewModel>()
              .AddTransient<DeptViewModel>()
+             .AddTransient<PowerViewModel>()
+             .AddTransient<MeunViewModel>()
              .AddTransient<EditAddWindowViewModel>()
              .AddTransient<EditRoleWindowViewModel>()
-                 .AddTransient<EditAddDeptWindowViewModel>()
+             .AddTransient<EditAddDeptWindowViewModel>()
+             .AddTransient<EditAddMeunWindowViewModel>()
              .AddSingleton(new Appsettings(basePath));
 
    

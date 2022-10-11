@@ -15,7 +15,7 @@
 
     <Grid Background="{StaticResource BackgroundBrush}">
         <Grid.Resources>
-            <vm:DeptViewModel x:Key="vModel" />
+            <vm:PowerViewModel x:Key="vModel" />
             <hc:EnumDataProvider x:Key="UserRoles" Type="st:UserRole"/>
         </Grid.Resources>
         <Grid.DataContext>

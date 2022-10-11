@@ -15,6 +15,7 @@ namespace LikeYou.WAWA.Bll
 
         public static Dal.BaseDao<Models.RoleTypes> RoleDao { get { return new Dal.BaseDao<Models.RoleTypes>(); } }
         public static Dal.BaseDao<Models.Deptment> DeptDao { get { return new Dal.BaseDao<Models.Deptment>(); } }
+        public static Dal.BaseDao<Models.MeunModel> MeunDao { get { return new Dal.BaseDao<Models.MeunModel>(); } }
 
     }
 }
